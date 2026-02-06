@@ -1,0 +1,158 @@
+\documentclass[14pt]{extarticle}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage{tabularray}
+\usepackage{graphicx} % Required for inserting images
+
+\setlength{\parindent}{0pt}
+
+\title{Tura}
+\author{smażalnia małp}
+\date{Luty 2026}
+
+\begin{document}
+	
+	\maketitle
+	\tableofcontents
+	\newpage
+	
+	\section{Wstęp}
+	Niewątpliwie jednym z najważniejszych osiągnięć ludzkości XX wieku jest wynalazek będący abstrakcyjnym modelem matematycznym. Mowa oczywiście o maszynie Turinga. Dzięki temu rewolucyjnemu wynalazkowi dziś jako ludzkość jesteśmy w stanie automatyzować zaawansowane zagadnienia, jak na przykład obróbka i montaż produktów w fabrykach czy rozwiązywanie skomplikowanych obliczeń matematycznych. Bez maszyn Turinga nie mielibyśmy dziś komputerów, urządzeń tak uniwersalnych i wszechstronnych jak te które znamy, z których korzystamy i z którego najprawdopodobniej czytelnik czyta tę dokumentację. W ramach urzeczywistnienia matematycznego modelu maszyny Turinga powstał projekt ,,Tura'', którego zadaniem jest fizyczna implementacja pewnego modelu maszyny. Z racji, iż podstawowy model zakłada nieograniczoną długość taśmy, implementajca maszyny jako takiej nie jest możliwa. Jednak pewien podzbiór maszyn zakłada skończoną długość taśmy. Tym modelem jest maszyna Turinga ograniczona liniowo. Implementowany model, w celu uproszczenia elektronicznych układów, dodatkowo posiada własność akceptującego stanu zatrzymującego.
+	
+	\section{Opis zastosowanego modelu}
+	Definicja maszyny Turinga $M$ jest następująca:
+	
+	\[
+	M = (Q, \Gamma, \Sigma, \delta, q_0, B, F),
+	\]
+	gdzie:
+	\begin{itemize}
+		\item $Q$ - zbiór stanów,
+		\item $\Gamma$ - alfabet taśmy,
+		\item $\Sigma$ - alfabet słowa wejściowego, $\Sigma \subseteq \Gamma$,
+		\item $\delta$ - funkcja przejścia, $\delta: Q \times \Gamma \rightarrow Q \times \Gamma \times D$, gdzie $D$ jest zbiorem możliwych ruchów głowicy maszyny, $D = \{L, R\},$
+		\item $q_0$ - stan początkowy, $q_0 \in Q$,
+		\item $B$ - symbol pusty, $B \in \Gamma \backslash \Sigma$,
+		\item $F$ - zbiór stanów akceptujących.
+	\end{itemize}
+	Żeby znaleźć jakieś intuicyjne wyobrażenie jak taka maszyna może wyglądać i funkcjonować możemy wyobrazić sobie skrzynkę, w której zamknięty jest układ sterujący urządzeniem oraz przede wszystkim przechowujący jego obecny stan. Obok skrzynki umieszczona jest taśma z symbolami. Ma ona swój początek z jednej strony, jednak z drugiej nie ma końca - jest jednostronnie nieskończona. Taśmę i skrzynkę łączy głowica - czyta ona lub nadpisuje jeden symbol na taśmie oraz przesuwa się po niej. Na początku działania maszyny głowica znajduje się nad skrajnym symbolem taśmy.
+	\newline \newline
+	Działanie takiej maszyny można porównać do następującej sekwencji czynów:
+	\begin{enumerate}
+		\item Głowica odczytuje symbol $s \in \Gamma$ z taśmy.
+		\item Skrzynka na podstawie obecnego stanu $q \in Q$ oraz $s$ oblicza nowy stan, symol i kierunek przesunięcia głowicy za pomocą funkcji przejścia:  $\delta(q,s) = (q', s', d)$.
+		\item Skrzynka zmienia obecny stan z $q$ na $q'$.
+		\item Głowica nadpisuje symbol na taśmie $s$ na $s'$, po czym przesuwa się o jeden symbol się zgodnie z kierunkiem $d$.
+		\item Sekwencja ta jest powtarzana dopóty, dopóki maszyna nie osiągnie stanu akceptującego.
+	\end{enumerate}
+	
+	[obrazek]
+	
+	Fizyczne urządzenie cechuje się dodatkowo ograniczoną długością taśmy oraz jednym stanem akceptującym zatrzymującym działanie maszyny. Formalnie ograniczoną długość taśmy można uzyskać poprzez wstawienie wartowników na jej początku oraz końcu, jednak te działanie pozostawione jest dla użytkownika maszyny do samodzielnej implementacji. Zaś stan akceptujący zatrzymujący działanie maszyny oznacza, że $F$ ma dokładnie jeden stan akceptujący $q_A$, po którego osiągnięciu urządzenie zatrzymuje pracę. 
+	
+	\section{Model Działania}
+	\subsection{Opis Ogólny}
+	Działanie maszyny w skrócie opiera się o zaprogramowanie urządzenia, wykonanie obliczeń i pobranie wyniku.
+	\begin{itemize}
+		\item Programowanie odbywa się poprzez zapisanie wejściowej zawartości taśmy oraz funkcji przejścia w trzech blokach pamięci (bloku symboli taśmy, bloku funkcji przejścia symbolu tasmy oraz bloku funkcji przejścia stanu). 
+		\item Wykonanie obliczeń to uruchomienie urządzenia i pozostawienie w działaniu do czasu osiągnięcia stanu akceptującego.
+		\item Pobranie wyniku jest odczytem zawartości taśmy po zakończeniu działania maszyny.
+	\end{itemize}
+	
+	\subsection{Opis Szczegółowy}
+	Opis szczegółowy wchodzi już w fizyczną implementację urządzenia. Jego celem jest staranny opis modułów, sygnałów, ich wzajemnej interakcji oraz dokładne wytłumaczenie działania maszyny. Opis w znacznej mierze opiera się o schematy KiCad i korzysta ze stosowanych w nich oznaczeń oraz nazw.
+	
+	\subsubsection{Moduły}
+	Maszyna została podzielona na 11 modułów w celu oznakowania jednostek odpowiedzialnych za poszczególne funkcje. Moduły w schematach KiCad zostały oznakowane niebieskimi ramkami i podpisane niebieskim tekstem lub jedynie podpisane niebieskim tekstem w przypadku modułów jednoelementowych.
+	\begin{description}
+		\item[\texttt{TAPE}] -- Blok pamięci symulujący taśmę. Każda komórka pamięci reprezentuje komórkę taśmy maszyny. Symbol taśmy składa się z 7 bitów danych pamięci (\texttt{D\textsubscript{0...6}});
+		\item[\texttt{TAPE SYMBOL REGISTER}] -- Rejestr przechowujący jeden symbol taśmy. Jest on potrzebny do chwilowego przechowania odczytanego symbolu na czas zapisu nowego do taśmy;
+		\item[\texttt{SYMBOL TRANSLATOR}] -- Blok pamięci symulujący funkcję przejścia dla zadanego symbolu oraz stanu zwracającą wynik w formie symbolu taśmy (7 bitów) oraz kierunku ruchu głowicy (1 bit);
+		\item[\texttt{STATE TRANSLATOR}] -- Blok pamięci symulujący funkcję przejścia dla zadanego symbolu oraz stanu zwracającą wynik w formie stanu (8 bitów);
+		\item[\texttt{STATE REGISTER}] -- Rejestr przechowujący obecny stan maszyny;
+		\item[\texttt{HEADER POSITION}] -- Zbiór liczników binarnych z możliwością inkrementacji oraz dekrementacji symulujący głowicę maszyny. Wartość licznika reprezentuje usytuowanie głowicy na taśmie;
+		\item[\texttt{HEADER POSITION DIRECTION DISASSEMBLY}] -- Prosty multiplekser sygnału zmiany wartości \texttt{HEADER POSITION} w zależności od kierunku zmiany;
+		\item[\texttt{HEADER POSITION CLOCK SYNCHRONIZATION}] -- Bramka AND synchronizująca operację zmiany wartości \texttt{HEADER POSITION} z zegarem;
+		\item[\texttt{STEP EXECUTION STATE REGISTER}] -- Rejestr przechowujący obecny stan wykonywania ruchu maszyny. Ze względu na brak praktycznego rozwiązania jednoczesnego odczytu i zapisu symbolu taśmy, przeprowadzenie przejścia zostało podzielone na dwa ruchy rozdzielające te operacje; stąd dwa stany wykonania ruchu;
+		\item[\texttt{IN-PROGRAM CONTROL LINES BUFFERS}] --
+		\item[\texttt{IN-OPERATION CONTROL LINES BUFFER}] --
+	\end{description}
+	
+	\subsubsection{Sygnały}
+	Oznaczenie sygnałów jest takie same jak oznaczenia zastosowane w schematach KiCad. Sygnały z $\overline{\texttt{poprzeczką nad nazwą}}$ oznaczają, że sygnał jest aktywny dla niskiego poziomu, zaś nieaktywny dla wysokiego.
+	%Część sygnałów nie ma bezpośredniego zastosowania podczas pracy maszyny, jednak są one potrzebne do jej programowania i odczytu wyniku pracy. Te sygnały znajdują się w interfejsie zewnętrznym, który został opisany w następnym podrozdziale. 
+	\newline \newline
+	\textbf{Lista sygnałów}:
+	\begin{description} 
+		\item[\texttt{D\textsubscript{0...7}}] -- Magistrala danych używana do programowania i odczytu  danych z maszyny;
+		\item[\texttt{S\textsubscript{0...6}}] -- Magistrala symbolu taśmy;
+		\item[\texttt{SR\textsubscript{0...6}}] -- Magistrala symbolu taśmy zapisanego w \texttt{TAPE SYMBOL REGISTER};
+		\item[\texttt{Q\textsubscript{0...7}}] -- Magistrala stanu;
+		\item[\texttt{QR\textsubscript{0...7}}] -- Magistrala stanu zapisanego w \texttt{STATE REGISTER};
+		\item[\texttt{H\textsubscript{0...15}}] -- Magistrala z wartością licznika \texttt{HEADER POSITION};
+		\item[\texttt{CLK}] -- Sygnał zegarowy wyznaczający rytm pracy; każda zmiana sygnału ze stanu niskiego do wysokiego powoduje przejście \texttt{STEP EXECUTION STATE REGISTER} do następnego stanu;
+		\item[\texttt{DIR}] -- Ustala kierunek zmiany wartości \texttt{HEADER POSITION}. Wysoki stan sygnału znaczy inkrementację, niski stan dekrementację;
+		\item[\texttt{HP\_EN}] -- Dopuszcza możliwość zmiany wartości \texttt{HEADER POSITION};
+		\item[\texttt{HP\_EN\_CLK}] -- sygnał \texttt{HP\_EN} połączony koniunkcją z zegarem:\\ $\texttt{HP\_EN\_CLK} = \texttt{HP\_EN} \cdot \texttt{CLK}$; synchronizuje zmianę wartości \texttt{HEADER POSITION} z zegarem;
+		\item[\texttt{DIR\_UP}] -- Decyduje o inkrementacji wartości \texttt{HEADER POSITION}; działa przy przejściu ze stanu niskiego do wysokiego;
+		\item[\texttt{DIR\_DOWN}] -- Decyduje o dekrementacji wartości \texttt{HEADER POSITION}; działa przy przejściu ze stanu niskiego do wysokiego;
+		\item[$\overline{\texttt{RESET}}$] -- Resetuje urządzenie, czyli ustawia \texttt{STEP EXECUTION STATE REGISTER} do stanu $0$ oraz ustawia licznik \texttt{HEADER POSITION} na $0$;
+		\item[$\overline{\texttt{PROGRAM}}$] -- Ustala tryb pracy. Poziom niski sygnału oznacza tryb programowania maszyny, poziom wysoki zaś tryb wykonywania programu;
+		\item[$\overline{\texttt{OPERATE}}$] -- Przeciwieństwo sygnału $\overline{\texttt{PROGRAM}}$. Niski poziom oznacza pracę urządzenia;
+		\item[\texttt{DDIR}] -- Ustala kierunek przepływu danych przez bufory \texttt{U15} i \texttt{U17} na magistralę \texttt{D\textsubscript{0...7}}. Wysoki poziom sygnału oznacza zapis danych z zewnątrz do bloków pamięci wewnątrz urządzenia. Niski poziom odczyt;
+		\item[\texttt{TSR\_WR}] -- Zapisuje dane z magistrali taśmy \texttt{S\textsubscript{0...6}} do \texttt{TAPE SYMBOL REGISTER}; zapis odbywa się podczas przejścia sygnału ze stanu niskiego do wysokiego;
+		\item[\texttt{SR\_WR}] -- Zapisuje dane z magistrali stanu \texttt{Q\textsubscript{0...7}} do \texttt{STATE REGISER}; zapis odbywa się podczas przejścia sygnału ze stanu niskiego do wysokiego;
+		\item[\texttt{T\_$\overline{\texttt{OE}}$}] -- Włącza wyjście danych z \texttt{TAPE} na magistralę \texttt{S\textsubscript{0...6}}; aktywny dla niskiego poziomu;
+		\item[\texttt{T\_$\overline{\texttt{WE}}$}] -- Włącza zapis danych w \texttt{TAPE} z magistrali \texttt{S\textsubscript{0...6}}; aktywny dla niskiego poziomu;
+		\item[\texttt{SYT\_$\overline{\texttt{OE}}$}] -- Włącza wyjście danych z \texttt{SYMBOL TRANSLATOR}; aktywny dla niskiego poziomu;
+		\item[\texttt{SYT\_$\overline{\texttt{WE}}$}] -- Włącza zapis danych w \texttt{SYMBOL TRANSLATOR}; aktywny dla niskiego poziomu;
+		\item[\texttt{STT\_$\overline{\texttt{OE}}$}] -- Włącza wyjście danych z \texttt{STATE TRANSLATOR}; aktywny dla niskiego poziomu;
+		\item[\texttt{STT\_$\overline{\texttt{WE}}$}] -- Włącza zapis danych w \texttt{STATE TRANSLATOR}; aktywny dla niskiego poziomu;
+		\item[\texttt{QR\_$\overline{\texttt{OE}}$}] -- Włącza wyjście danych z \texttt{STATE REGISTER}; aktywny dla niskiego poziomu;
+		\item[\texttt{T\_$\overline{\texttt{*E}}$\_E}, \texttt{SYT\_$\overline{\texttt{*E}}$\_E}, \texttt{ST\_$\overline{\texttt{*E}}$\_E}, \texttt{QR\_$\overline{\texttt{OE}}$\_E}] -- Sygnały odpowiadające tym bez sufiksu ,,\texttt{\_E}'', będące połączone z nimi przez bufor \texttt{U19} oraz będące wyprowadzeniem do interfejsu zewnętrznego;
+		\item[\texttt{T\_$\overline{\texttt{*E}}$\_B}, \texttt{SYT\_$\overline{\texttt{OE}}$\_B}, \texttt{STT\_$\overline{\texttt{OE}}$\_B}, \texttt{DIR\_B}] -- Sygnały odpowiadające tym bez sufiksu ,,\texttt{\_B}'', będące połączone z nimi przez bufor \texttt{U18}. Są one sygnałami generowanymi przez maszynę podczas obliczeń potrzebnymi do poprawnej jej samodzielnej pracy;
+		\item[$\overline{\texttt{FINISH\_STATE}}$] -- Informuje o osiągnięciu przez maszynę stanu akceptującego i zarazem zatrzymującego pracę; aktywny dla niskiego poziomu.
+		\item[\texttt{SEST\_STATE}] -- Wskazuje obecny stan \texttt{STEP EXECUTION STATE REGISTER};
+	\end{description}
+	
+	\subsubsection{Interfejs zewnętrzny}
+	W celu zasilenia urządzenia oraz komunikacji zastosowany został zewnętrzny interfejs składający się z 20 wyjść sterujących, 17 informujacych o stanie maszyny oraz 7 zasilających. W sumie daje to 44 wyjścia. Wszystkie wspomniane sygnały (po za \texttt{Vcc} oraz \texttt{Vss}) zostały wyjaśnione w poprzednim podrozdziale. By uniknąć zbyt podobnych oznaczeń, kierunki sygnałów zamiast ,,Wej/Wyj'' zostały oznaczone angielskimi ,,In/Out''.
+	\newline \newline
+	\textbf{Tabela sygnałów interfejsu:}
+	\SetTblrInner{rowsep=4pt}
+	\begin{table}[h!]
+		\centering
+		\begin{tblr}{||c|c|c||}
+			\hline
+			\textbf{Num. wyjścia} & \textbf{Sygnały} & \textbf{Kierunek} \\ \hline
+			1-8 & \texttt{D\textsubscript{0...7}} & In/Out \\ \hline
+			9 & \texttt{CLK} & In \\ \hline
+			10 & $\overline{\texttt{RESET}}$ & In \\ \hline
+			11 & $\overline{\texttt{PROGRAM}}$ & In \\ \hline
+			12 & \texttt{DDIR} & In \\ \hline
+			13 & \texttt{T\_}$\overline{\texttt{OE}}$\texttt{\_E} & In \\ \hline
+			14 & \texttt{T\_}$\overline{\texttt{WE}}$\texttt{\_E} & In \\ \hline
+			15 & \texttt{SYT\_}$\overline{\texttt{OE}}$\texttt{\_E} & In \\ \hline
+			16 & \texttt{SYT\_}$\overline{\texttt{WE}}$\texttt{\_E} & In \\ \hline
+			17 & \texttt{STT\_}$\overline{\texttt{OE}}$\texttt{\_E} & In \\ \hline
+			18 & \texttt{STT\_}$\overline{\texttt{WE}}$\texttt{\_E} & In \\ \hline
+			19 & \texttt{QR\_}$\overline{\texttt{OE}}$\texttt{\_E} & In \\ \hline
+			20 & $\overline{\texttt{FINISH\_STATE}}$ & Out \\ \hline
+			21,23,25 & \texttt{Vcc} & --- \\ \hline
+			22,24,26 & \texttt{Vss} & --- \\ \hline
+			27-42 & \texttt{H\textsubscript{0...15}} & Out \\ \hline
+			43 & \texttt{SESR\_STATE} & Out \\ \hline
+			44 & \texttt{Vss} & Out \\ \hline
+		\end{tblr}
+		\caption{Lista sygnałów interfejsu zewnętrznego}
+		\label{tab:placeholder}
+	\end{table}
+	\vspace{1cm}
+	
+	Wyjścia \texttt{Vcc} oraz \texttt{Vss} są wyjściami zasilania. \texttt{Vcc} powinno mieć napięcie +5V względem \texttt{Vss}, które jest uziemieniem.
+	
+	\subsubsection{Programowanie}
+	Programowanie 
+	
+\end{document}
