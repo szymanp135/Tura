@@ -64,9 +64,9 @@
 	Opis szczegółowy wchodzi już w fizyczną implementację urządzenia. Jego celem jest staranny opis modułów, sygnałów, ich wzajemnej interakcji oraz dokładne wytłumaczenie działania maszyny. Opis w znacznej mierze opiera się o schematy KiCad i korzysta ze stosowanych w nich oznaczeń oraz nazw.
 	
 	\subsubsection{Moduły}
-	Maszyna została podzielona na 11 modułów w celu oznakowania jednostek odpowiedzialnych za poszczególne funkcje. Moduły w schematach KiCad zostały oznakowane niebieskimi ramkami i podpisane niebieskim tekstem lub jedynie podpisane niebieskim tekstem w przypadku modułów jednoelementowych.
+	Maszyna została podzielona na 11 modułów w celu oznakowania jednostek odpowiedzialnych za poszczególne funkcje. Moduły w schematach KiCad zostały otoczone ciemnożłółtymi ramkami i podpisane niebieskim tekstem lub jedynie podpisane niebieskim tekstem w przypadku modułów jednoelementowych.
 	\begin{description}
-		\item[\texttt{TAPE}] -- Blok pamięci symulujący taśmę. Każda komórka pamięci reprezentuje komórkę taśmy maszyny. Symbol taśmy składa się z 7 bitów danych pamięci (\texttt{D\textsubscript{0...6}});
+		\item[\texttt{TAPE}] -- Blok pamięci symulujący taśmę. Każda komórka pamięci reprezentuje jeden symbol taśmy. Pojedynczy symbol taśmy składa się z 7 bitów (\texttt{D\textsubscript{0...6}});
 		\item[\texttt{TAPE SYMBOL REGISTER}] -- Rejestr przechowujący jeden symbol taśmy. Jest on potrzebny do chwilowego przechowania odczytanego symbolu na czas zapisu nowego do taśmy;
 		\item[\texttt{SYMBOL TRANSLATOR}] -- Blok pamięci symulujący funkcję przejścia dla zadanego symbolu oraz stanu zwracającą wynik w formie symbolu taśmy (7 bitów) oraz kierunku ruchu głowicy (1 bit);
 		\item[\texttt{STATE TRANSLATOR}] -- Blok pamięci symulujący funkcję przejścia dla zadanego symbolu oraz stanu zwracającą wynik w formie stanu (8 bitów);
@@ -75,8 +75,8 @@
 		\item[\texttt{HEADER POSITION DIRECTION DISASSEMBLY}] -- Prosty multiplekser sygnału zmiany wartości \texttt{HEADER POSITION} w zależności od kierunku zmiany;
 		\item[\texttt{HEADER POSITION CLOCK SYNCHRONIZATION}] -- Bramka AND synchronizująca operację zmiany wartości \texttt{HEADER POSITION} z zegarem;
 		\item[\texttt{STEP EXECUTION STATE REGISTER}] -- Rejestr przechowujący obecny stan wykonywania ruchu maszyny. Ze względu na brak praktycznego rozwiązania jednoczesnego odczytu i zapisu symbolu taśmy, przeprowadzenie przejścia zostało podzielone na dwa ruchy rozdzielające te operacje; stąd dwa stany wykonania ruchu;
-		\item[\texttt{IN-PROGRAM CONTROL LINES BUFFERS}] --
-		\item[\texttt{IN-OPERATION CONTROL LINES BUFFER}] --
+		\item[\texttt{IN-PROGRAM CONTROL LINES BUFFERS}] -- Zestaw buforów oddzielający kontrolne linie sygnałowe interfejsu zewnętrznego od tych wewnęrznych;
+		\item[\texttt{IN-OPERATION CONTROL LINES BUFFER}] -- Bufor oddzielający wewnętrzne linie kontrolne od tych generowanych przez urządzenie podczas pracy. Rozdzielenie to jest potrzebne w celu umożliwienia programowania maszyny (dostępu sygnałów zewnętrznych do wewnętrznych);
 	\end{description}
 	
 	\subsubsection{Sygnały}
@@ -117,7 +117,8 @@
 	\end{description}
 	
 	\subsubsection{Interfejs zewnętrzny}
-	W celu zasilenia urządzenia oraz komunikacji zastosowany został zewnętrzny interfejs składający się z 20 wyjść sterujących, 17 informujacych o stanie maszyny oraz 7 zasilających. W sumie daje to 44 wyjścia. Wszystkie wspomniane sygnały (po za \texttt{Vcc} oraz \texttt{Vss}) zostały wyjaśnione w poprzednim podrozdziale. By uniknąć zbyt podobnych oznaczeń, kierunki sygnałów zamiast ,,Wej/Wyj'' zostały oznaczone angielskimi ,,In/Out''.
+	W celu zasilenia urządzenia oraz komunikacji zastosowany został zewnętrzny interfejs składający się z 20 wyjść sterujących, 17 informujacych o stanie maszyny oraz 7 zasilających. W sumie daje to 44 wyjścia. Wszystkie wspomniane sygnały (po za \texttt{Vcc} oraz \texttt{Vss}) zostały wyjaśnione w poprzednim podrozdziale. Wyjścia \texttt{Vcc} oraz \texttt{Vss} są wyjściami odpowiednio zasilania i uziemienia. \texttt{Vcc} powinno mieć napięcie +5V względem \texttt{Vss}. \\
+	By uniknąć zbyt podobnych oznaczeń, kierunki sygnałów zamiast ,,Wej/Wyj'' zostały oznaczone angielskimi ,,In/Out''.
 	\newline \newline
 	\textbf{Tabela sygnałów interfejsu:}
 	\SetTblrInner{rowsep=4pt}
@@ -139,18 +140,24 @@
 			18 & \texttt{STT\_}$\overline{\texttt{WE}}$\texttt{\_E} & In \\ \hline
 			19 & \texttt{QR\_}$\overline{\texttt{OE}}$\texttt{\_E} & In \\ \hline
 			20 & $\overline{\texttt{FINISH\_STATE}}$ & Out \\ \hline
+		\end{tblr}
+		\caption{Lista sygnałów interfejsu zewnętrznego}
+		\label{tab:extinterfacetable}
+	\end{table}
+	\newpage
+	\begin{table}
+		\centering
+		\begin{tblr}{||c|c|c||}
+			\hline
+			\textbf{Num. wyjścia} & \textbf{Sygnały} & \textbf{Kierunek} \\ \hline
 			21,23,25 & \texttt{Vcc} & --- \\ \hline
 			22,24,26 & \texttt{Vss} & --- \\ \hline
 			27-42 & \texttt{H\textsubscript{0...15}} & Out \\ \hline
 			43 & \texttt{SESR\_STATE} & Out \\ \hline
-			44 & \texttt{Vss} & Out \\ \hline
+			44 & \texttt{Vss} & --- \\ \hline
 		\end{tblr}
-		\caption{Lista sygnałów interfejsu zewnętrznego}
-		\label{tab:placeholder}
+		\caption{Lista sygnałów interfejsu zewnętrznego (cd.)}
 	\end{table}
-	\vspace{1cm}
-	
-	Wyjścia \texttt{Vcc} oraz \texttt{Vss} są wyjściami zasilania. \texttt{Vcc} powinno mieć napięcie +5V względem \texttt{Vss}, które jest uziemieniem.
 	
 	\subsubsection{Programowanie}
 	Programowanie 

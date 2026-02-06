@@ -1302,6 +1302,19 @@
 			(embedded_fonts no)
 		)
 	)
+	(rectangle
+		(start 163.83 101.6)
+		(end 227.33 163.83)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 132 132 0 1)
+		)
+		(fill
+			(type none)
+		)
+		(uuid e998c0b3-ca65-45e8-95f1-d156a924e2dc)
+	)
 	(text "IN-OPERATION\nCONTROL LINES BUFFER"
 		(exclude_from_sim no)
 		(at 195.834 106.426 0)
@@ -2599,6 +2612,16 @@
 		)
 		(uuid "0205a7ad-7d69-4ada-a5dc-5d496dc009c3")
 	)
+	(polyline
+		(pts
+			(xy 280.67 15.24) (xy 284.48 15.24)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0263e603-345a-4ee2-a55d-5bc72750281e")
+	)
 	(bus
 		(pts
 			(xy 60.96 55.88) (xy 60.96 58.42)
@@ -2719,6 +2742,17 @@
 		)
 		(uuid "0e2c9309-cf59-458a-a9bf-3c98ca1b98b3")
 	)
+	(polyline
+		(pts
+			(xy 284.48 15.24) (xy 284.48 95.25)
+		)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 132 132 0 1)
+		)
+		(uuid "0f5a234b-5c00-4391-8fc9-aef9ded216bd")
+	)
 	(wire
 		(pts
 			(xy 66.04 172.72) (xy 73.66 172.72)
@@ -2828,6 +2862,17 @@
 			(type default)
 		)
 		(uuid "15a67a15-a7b4-4653-b093-c9f41fa343fb")
+	)
+	(polyline
+		(pts
+			(xy 115.57 187.96) (xy 49.53 187.96)
+		)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 132 132 0 1)
+		)
+		(uuid "170fa490-8ef1-44ad-8d25-480f61276ba0")
 	)
 	(wire
 		(pts
@@ -2948,6 +2993,17 @@
 			(type default)
 		)
 		(uuid "269f944d-eabb-4465-a300-20e654bcfe27")
+	)
+	(polyline
+		(pts
+			(xy 115.57 95.25) (xy 115.57 187.96)
+		)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 132 132 0 1)
+		)
+		(uuid "273c0db4-001b-4fff-80b9-0f9bc9e2faa9")
 	)
 	(bus
 		(pts
@@ -3209,6 +3265,17 @@
 		)
 		(uuid "3fe5b802-0682-478b-ae56-b83b983a077f")
 	)
+	(polyline
+		(pts
+			(xy 49.53 15.24) (xy 284.48 15.24)
+		)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 132 132 0 1)
+		)
+		(uuid "401be0eb-3286-464d-8fff-2af90604ce33")
+	)
 	(wire
 		(pts
 			(xy 135.89 71.12) (xy 135.89 93.98)
@@ -3418,6 +3485,16 @@
 			(type default)
 		)
 		(uuid "4df07af4-0f3d-4c9a-8213-c18cffe56ca7")
+	)
+	(polyline
+		(pts
+			(xy 284.48 15.24) (xy 284.48 15.24)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4ed642db-4e5a-4f28-889e-7dadd36cb88a")
 	)
 	(wire
 		(pts
@@ -3728,6 +3805,17 @@
 			(type default)
 		)
 		(uuid "6e5625f6-ab19-4864-8bb0-3490eb20d610")
+	)
+	(polyline
+		(pts
+			(xy 49.53 187.96) (xy 49.53 15.24)
+		)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 132 132 0 1)
+		)
+		(uuid "6e7c8dfc-8275-4146-84b2-f0c626022b97")
 	)
 	(wire
 		(pts
@@ -4978,6 +5066,17 @@
 			(type default)
 		)
 		(uuid "e08ddd4e-d5f2-4f88-b377-502a8304905c")
+	)
+	(polyline
+		(pts
+			(xy 284.48 95.25) (xy 115.57 95.25)
+		)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 132 132 0 1)
+		)
+		(uuid "e0a758eb-366f-4fcc-870a-bb2e277bdd31")
 	)
 	(wire
 		(pts
@@ -8075,7 +8174,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0d01d0b8-70e5-4ecc-8071-e658f9e39ffd")
-		(property "Reference" "U18"
+		(property "Reference" "U17"
 			(at 197.7233 116.84 0)
 			(effects
 				(font
@@ -8183,7 +8282,7 @@
 		(instances
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/95b00103-b1d8-417f-a672-0089eab2b908"
-					(reference "U18")
+					(reference "U17")
 					(unit 1)
 				)
 			)
@@ -8553,7 +8652,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "74156349-b6ed-4efc-9ead-90b5e0722f41")
-		(property "Reference" "U15"
+		(property "Reference" "U14"
 			(at 82.1533 40.64 0)
 			(effects
 				(font
@@ -8661,7 +8760,7 @@
 		(instances
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/95b00103-b1d8-417f-a672-0089eab2b908"
-					(reference "U15")
+					(reference "U14")
 					(unit 1)
 				)
 			)
@@ -8743,7 +8842,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "81b3cdcc-18ad-4a62-974c-0e1687ddb24e")
-		(property "Reference" "U16"
+		(property "Reference" "U15"
 			(at 88.5033 139.7 0)
 			(effects
 				(font
@@ -8851,7 +8950,7 @@
 		(instances
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/95b00103-b1d8-417f-a672-0089eab2b908"
-					(reference "U16")
+					(reference "U15")
 					(unit 1)
 				)
 			)
@@ -9156,7 +9255,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "95552f6b-b331-4d72-9624-c109db2e2434")
-		(property "Reference" "U19"
+		(property "Reference" "U18"
 			(at 234.5533 39.37 0)
 			(effects
 				(font
@@ -9264,7 +9363,7 @@
 		(instances
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/95b00103-b1d8-417f-a672-0089eab2b908"
-					(reference "U19")
+					(reference "U18")
 					(unit 1)
 				)
 			)
@@ -9699,7 +9798,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ccf83271-ee56-4d25-8661-c893f6538c3b")
-		(property "Reference" "U17"
+		(property "Reference" "U16"
 			(at 164.7033 40.64 0)
 			(effects
 				(font
@@ -9807,7 +9906,7 @@
 		(instances
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/95b00103-b1d8-417f-a672-0089eab2b908"
-					(reference "U17")
+					(reference "U16")
 					(unit 1)
 				)
 			)

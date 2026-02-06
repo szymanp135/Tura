@@ -4097,7 +4097,8 @@
 		(end 154.94 71.12)
 		(stroke
 			(width 0)
-			(type default)
+			(type solid)
+			(color 132 132 0 1)
 		)
 		(fill
 			(type none)
@@ -5974,6 +5975,12 @@
 			(uuid "21572059-76c7-4f56-a912-c8d4a9159c18")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR09")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR029")
@@ -6044,114 +6051,16 @@
 			(uuid "b1381e59-c4ba-4a37-9992-9699c948aa27")
 		)
 		(instances
-			(project "turing_machine"
-				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
 					(reference "C16")
 					(unit 1)
 				)
 			)
-		)
-	)
-	(symbol
-		(lib_id "74xx:74LS00")
-		(at 218.44 158.75 90)
-		(unit 5)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "1500270f-d3ac-4b93-8f06-b3ea6a1e240d")
-		(property "Reference" "U4"
-			(at 218.44 148.59 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "74LS00"
-			(at 218.44 151.13 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 218.44 158.75 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "http://www.ti.com/lit/gpn/sn74ls00"
-			(at 218.44 158.75 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "quad 2-input NAND gate"
-			(at 218.44 158.75 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "12"
-			(uuid "3498a8b2-f85e-4949-b5c3-65ab8078740d")
-		)
-		(pin "13"
-			(uuid "f73a2fef-7d62-41be-915b-4b5b673848f6")
-		)
-		(pin "3"
-			(uuid "8423f12d-4516-4b37-8c5b-5479df7cfe62")
-		)
-		(pin "2"
-			(uuid "1228a43e-b280-4538-9e26-e006b4b6d367")
-		)
-		(pin "1"
-			(uuid "33d3c000-3bd3-4b60-a778-892598cbdea7")
-		)
-		(pin "4"
-			(uuid "34c87e28-1f5a-4bb6-be8b-189ac2899af3")
-		)
-		(pin "14"
-			(uuid "38bd6f47-3cef-4bc2-9c9f-0b5495eb89e3")
-		)
-		(pin "9"
-			(uuid "7113fb88-6935-491a-8c42-5bfc3ef49b6f")
-		)
-		(pin "5"
-			(uuid "cdc135fd-4e1b-465f-973c-c6e12cf066bf")
-		)
-		(pin "7"
-			(uuid "d5714e99-5110-481e-9fcf-7574fc4dba7c")
-		)
-		(pin "6"
-			(uuid "6b18710a-128e-4204-940a-8b7a30fc0630")
-		)
-		(pin "11"
-			(uuid "1446c9b1-f97c-421d-90e1-2aaa36fefd50")
-		)
-		(pin "8"
-			(uuid "6e5974f3-478a-4149-bd12-55e8f8fcddcb")
-		)
-		(pin "10"
-			(uuid "c8e7af59-54fc-44c6-b21f-b5a14c7f3bc2")
-		)
-		(instances
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
-					(reference "U4")
-					(unit 5)
+					(reference "C16")
+					(unit 1)
 				)
 			)
 		)
@@ -6218,6 +6127,12 @@
 			(uuid "72f1ab19-f449-4405-ae20-4b57320026b9")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "C8")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "C8")
@@ -6284,6 +6199,12 @@
 			(uuid "c8da5cac-36ce-441f-9985-d18bea49419a")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR02")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR022")
@@ -6354,6 +6275,12 @@
 			(uuid "f8801e3f-ab7b-4a19-b130-9c7e6c91ff66")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "C1")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "C1")
@@ -6420,6 +6347,12 @@
 			(uuid "35743c1e-7aee-4fdd-8288-c9192782e853")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR05")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR025")
@@ -6490,6 +6423,12 @@
 			(uuid "e09ada0a-6236-4672-a10f-70f0e496b980")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "C18")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "C18")
@@ -6556,114 +6495,16 @@
 			(uuid "71df275c-f618-4eee-b89d-0e072cc4bd18")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR036")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR056")
 					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "74xx:74LS00")
-		(at 50.8 54.61 0)
-		(unit 3)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "227f5d14-e186-4ee4-86ae-6d95eca6c813")
-		(property "Reference" "U4"
-			(at 50.7917 45.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "74LS00"
-			(at 50.7917 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 50.8 54.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "http://www.ti.com/lit/gpn/sn74ls00"
-			(at 50.8 54.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "quad 2-input NAND gate"
-			(at 50.8 54.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "12"
-			(uuid "3498a8b2-f85e-4949-b5c3-65ab8078740e")
-		)
-		(pin "13"
-			(uuid "f73a2fef-7d62-41be-915b-4b5b673848f7")
-		)
-		(pin "3"
-			(uuid "8423f12d-4516-4b37-8c5b-5479df7cfe63")
-		)
-		(pin "2"
-			(uuid "1228a43e-b280-4538-9e26-e006b4b6d368")
-		)
-		(pin "1"
-			(uuid "33d3c000-3bd3-4b60-a778-892598cbdea8")
-		)
-		(pin "4"
-			(uuid "34c87e28-1f5a-4bb6-be8b-189ac2899af4")
-		)
-		(pin "14"
-			(uuid "38bd6f47-3cef-4bc2-9c9f-0b5495eb89e4")
-		)
-		(pin "9"
-			(uuid "7113fb88-6935-491a-8c42-5bfc3ef49b70")
-		)
-		(pin "5"
-			(uuid "cdc135fd-4e1b-465f-973c-c6e12cf066c0")
-		)
-		(pin "7"
-			(uuid "d5714e99-5110-481e-9fcf-7574fc4dba7d")
-		)
-		(pin "6"
-			(uuid "6b18710a-128e-4204-940a-8b7a30fc0631")
-		)
-		(pin "11"
-			(uuid "1446c9b1-f97c-421d-90e1-2aaa36fefd51")
-		)
-		(pin "8"
-			(uuid "6e5974f3-478a-4149-bd12-55e8f8fcddcc")
-		)
-		(pin "10"
-			(uuid "c8e7af59-54fc-44c6-b21f-b5a14c7f3bc3")
-		)
-		(instances
-			(project "turing_machine"
-				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
-					(reference "U4")
-					(unit 3)
 				)
 			)
 		)
@@ -6726,6 +6567,12 @@
 			(uuid "76d48599-c652-4ebc-933b-740e2a3769ef")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR013")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR033")
@@ -6792,6 +6639,12 @@
 			(uuid "888061c0-6c9f-4cbc-b866-8e33ac5eefd2")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR028")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR048")
@@ -6858,6 +6711,12 @@
 			(uuid "93994694-bf5a-442b-8545-3b1a5493f561")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR014")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR034")
@@ -6924,6 +6783,12 @@
 			(uuid "6ded0b40-a113-46c8-bb7b-69cbe651af54")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR025")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR045")
@@ -6994,6 +6859,12 @@
 			(uuid "7452a1ae-7370-4c9c-9f0e-4a9d1275430a")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "C7")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "C7")
@@ -7061,6 +6932,12 @@
 			(uuid "b1ab12d3-602c-49ea-8300-d83660b634ef")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR043")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR063")
@@ -7095,7 +6972,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_DIP:DIP-14_W7.62mm"
 			(at 66.04 54.61 0)
 			(effects
 				(font
@@ -7165,6 +7042,12 @@
 			(uuid "df862c50-216c-4fb7-bfce-6e07e2bc5743")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "U3")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "U1")
@@ -7231,6 +7114,12 @@
 			(uuid "ba5e6214-558e-4daa-8a4c-1569a976ab52")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR024")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR044")
@@ -7297,6 +7186,12 @@
 			(uuid "425db8a8-8a31-4ae6-ab94-f0300ec1d36f")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR026")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR046")
@@ -7367,6 +7262,12 @@
 			(uuid "91641dda-8581-4525-8884-bb4562004ec7")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "C3")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "C3")
@@ -7433,6 +7334,12 @@
 			(uuid "3695f0e7-1e6c-487c-a47c-fd923393e316")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR018")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR038")
@@ -7500,6 +7407,12 @@
 			(uuid "b1a6e63e-e7df-4e55-9742-5addf60c505b")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR045")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR065")
@@ -7566,6 +7479,12 @@
 			(uuid "7ce3e192-cb87-40e5-8b4d-e5a9266fe03a")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR07")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR027")
@@ -7632,6 +7551,12 @@
 			(uuid "a3aa76bd-b9a6-47b6-8c06-3142ac76df8d")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR017")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR037")
@@ -7699,6 +7624,12 @@
 			(uuid "2621d03f-6cfe-4fed-9df4-7245693a9131")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR038")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR058")
@@ -7716,7 +7647,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5fbcbe46-0570-4eb5-a66f-cff451b4c465")
-		(property "Reference" "U8"
+		(property "Reference" "U6"
 			(at 171.704 148.59 90)
 			(effects
 				(font
@@ -7734,7 +7665,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_DIP:DIP-14_W7.62mm"
 			(at 175.26 158.75 0)
 			(effects
 				(font
@@ -7795,9 +7726,15 @@
 			(uuid "e5863233-c8cf-4694-9811-1a241495c3c8")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "U6")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
-					(reference "U8")
+					(reference "U6")
 					(unit 2)
 				)
 			)
@@ -7861,6 +7798,12 @@
 			(uuid "77a1bac2-0cd0-491c-96d7-71dce9360335")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR030")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR050")
@@ -7927,6 +7870,12 @@
 			(uuid "e1ddf560-4374-4ea4-83c9-b26fc8ee20f1")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR01")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR021")
@@ -7993,6 +7942,12 @@
 			(uuid "d6171f51-0325-4795-8746-8439a4c22e37")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR039")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR059")
@@ -8059,6 +8014,12 @@
 			(uuid "29d411e1-986b-4478-9242-3abc8832f049")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR029")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR049")
@@ -8125,6 +8086,12 @@
 			(uuid "03d1d39d-a592-440e-b7c5-4e23836be270")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR021")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR041")
@@ -8191,6 +8158,12 @@
 			(uuid "b1f9c025-20b2-4e25-a0bf-5fc38cc7b3dd")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR04")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR024")
@@ -8261,6 +8234,12 @@
 			(uuid "92a88e0b-9f89-4053-96ac-bd6548fc3745")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "C6")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "C6")
@@ -8327,6 +8306,12 @@
 			(uuid "d82cb948-f203-4e55-a3e0-c2cb956cc080")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR019")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR039")
@@ -8397,6 +8382,12 @@
 			(uuid "64db5c24-5663-43cc-bbf9-18e097162d73")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "C4")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "C4")
@@ -8463,6 +8454,12 @@
 			(uuid "f3e9f60d-16b2-4c0c-b9f6-ddeebd5fafe9")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR023")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR043")
@@ -8497,7 +8494,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_DIP:DIP-14_W7.62mm"
 			(at 109.22 52.07 0)
 			(effects
 				(font
@@ -8567,6 +8564,12 @@
 			(uuid "df862c50-216c-4fb7-bfce-6e07e2bc5744")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "U5")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "U1")
@@ -8633,6 +8636,12 @@
 			(uuid "79b1aea4-4885-42f2-8887-6bc3ccd23f4e")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR032")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR052")
@@ -8699,6 +8708,12 @@
 			(uuid "d5a8b3c3-4692-4a47-824c-abf678867718")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR033")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR053")
@@ -8766,6 +8781,12 @@
 			(uuid "6083a7fd-b836-4c42-abd7-aaef75105792")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR047")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR067")
@@ -8836,6 +8857,12 @@
 			(uuid "b2eba6c7-04aa-4415-99ec-d11d0aa74514")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "C5")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "C5")
@@ -8902,6 +8929,12 @@
 			(uuid "5db1a63b-6dac-48b6-993d-8d5fd102b79b")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR010")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR030")
@@ -8968,6 +9001,12 @@
 			(uuid "1c7048e6-f621-42bf-9242-b959522db089")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR012")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR032")
@@ -9035,6 +9074,12 @@
 			(uuid "bfbcd9ee-b1e7-4bf3-ab17-a53dcb436cc2")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR044")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR064")
@@ -9101,6 +9146,12 @@
 			(uuid "8d59189f-179e-4484-9452-07c411f8d551")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR022")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR042")
@@ -9119,7 +9170,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "91342e98-46fc-4c5b-ba04-a5fa9290bef4")
-		(property "Reference" "U14"
+		(property "Reference" "U13"
 			(at 355.2033 134.62 0)
 			(effects
 				(font
@@ -9137,7 +9188,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_DIP:DIP-14_W7.62mm"
 			(at 353.06 144.78 0)
 			(effects
 				(font
@@ -9207,9 +9258,15 @@
 			(uuid "d3926952-8653-4577-a9a5-ed745ee0ffaf")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "U11")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
-					(reference "U14")
+					(reference "U13")
 					(unit 2)
 				)
 			)
@@ -9277,6 +9334,12 @@
 			(uuid "2f430291-39dd-4958-8ccf-493ae9d577db")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "C2")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "C2")
@@ -9295,7 +9358,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "974b3b58-e8c8-432c-bc5b-f99b4fef08f1")
-		(property "Reference" "U14"
+		(property "Reference" "U13"
 			(at 85.9633 44.45 0)
 			(effects
 				(font
@@ -9313,7 +9376,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_DIP:DIP-14_W7.62mm"
 			(at 83.82 54.61 0)
 			(effects
 				(font
@@ -9383,9 +9446,15 @@
 			(uuid "d3926952-8653-4577-a9a5-ed745ee0ffb0")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "U4")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
-					(reference "U14")
+					(reference "U13")
 					(unit 1)
 				)
 			)
@@ -9453,6 +9522,12 @@
 			(uuid "40e0a9c8-c93f-4b52-8faa-9b6a5dc3ea1f")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "C15")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "C15")
@@ -9519,6 +9594,12 @@
 			(uuid "d0d1a726-cdf7-4b0d-9da5-a6440ff11503")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR020")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR040")
@@ -9585,6 +9666,12 @@
 			(uuid "44dad035-7999-4104-bd59-ba975e0b1acd")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR031")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR051")
@@ -9655,6 +9742,12 @@
 			(uuid "dab27e48-cde8-4b39-b6cc-cda6f0b64518")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "C14")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "C14")
@@ -9721,6 +9814,12 @@
 			(uuid "059a246f-ec2b-4a7a-aeec-9f7019ffefb8")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR011")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR031")
@@ -9755,7 +9854,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_DIP:DIP-14_W7.62mm"
 			(at 261.62 158.75 0)
 			(effects
 				(font
@@ -9825,6 +9924,12 @@
 			(uuid "df862c50-216c-4fb7-bfce-6e07e2bc5745")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "U9")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "U1")
@@ -9891,6 +9996,12 @@
 			(uuid "e687e557-5681-4318-b435-b759d2217b20")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR06")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR026")
@@ -9957,6 +10068,12 @@
 			(uuid "5bbfa0bc-3fa0-4af4-9a22-4b014473ee7b")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR034")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR054")
@@ -10024,6 +10141,12 @@
 			(uuid "c03ad945-bf75-4d5d-8dde-966d86834a64")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR042")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR062")
@@ -10091,6 +10214,12 @@
 			(uuid "329a6bfe-ed42-47ab-943b-17f17e2f830f")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR041")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR061")
@@ -10161,6 +10290,12 @@
 			(uuid "1428dc74-e1df-4203-9422-c8c0e68de5bc")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "C13")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "C13")
@@ -10227,6 +10362,12 @@
 			(uuid "537600dd-b277-4eea-8b38-044a496a06fa")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR040")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR060")
@@ -10245,7 +10386,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b81a30bc-599f-435b-827e-d5d88544eb36")
-		(property "Reference" "U14"
+		(property "Reference" "U13"
 			(at 261.62 129.54 90)
 			(effects
 				(font
@@ -10261,7 +10402,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_DIP:DIP-14_W7.62mm"
 			(at 261.62 139.7 0)
 			(effects
 				(font
@@ -10331,9 +10472,15 @@
 			(uuid "d3926952-8653-4577-a9a5-ed745ee0ffb1")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "U8")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
-					(reference "U14")
+					(reference "U13")
 					(unit 3)
 				)
 			)
@@ -10401,6 +10548,12 @@
 			(uuid "ee50803d-a7ef-4774-8aa6-e37d7fa63699")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "C9")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "C9")
@@ -10411,16 +10564,16 @@
 	)
 	(symbol
 		(lib_id "74xx:74LS00")
-		(at 332.74 152.4 0)
-		(unit 4)
+		(at 218.44 158.75 90)
+		(unit 5)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "c406c664-bdfe-4a35-873c-25c5790ebd6a")
-		(property "Reference" "U4"
-			(at 332.7317 143.51 0)
+		(uuid "bbf2c4b6-7a61-4fc3-93cb-751efab44f95")
+		(property "Reference" "U2"
+			(at 218.44 148.59 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10428,15 +10581,15 @@
 			)
 		)
 		(property "Value" "74LS00"
-			(at 332.7317 146.05 0)
+			(at 218.44 151.13 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
-			(at 332.74 152.4 0)
+		(property "Footprint" "Package_DIP:DIP-14_W7.62mm"
+			(at 218.44 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10445,7 +10598,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.ti.com/lit/gpn/sn74ls00"
-			(at 332.74 152.4 0)
+			(at 218.44 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10454,7 +10607,7 @@
 			)
 		)
 		(property "Description" "quad 2-input NAND gate"
-			(at 332.74 152.4 0)
+			(at 218.44 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10462,52 +10615,156 @@
 				(hide yes)
 			)
 		)
-		(pin "12"
-			(uuid "3498a8b2-f85e-4949-b5c3-65ab8078740f")
+		(pin "11"
+			(uuid "2b30409b-febf-417f-a962-b6573ac566ac")
 		)
 		(pin "13"
-			(uuid "f73a2fef-7d62-41be-915b-4b5b673848f8")
-		)
-		(pin "3"
-			(uuid "8423f12d-4516-4b37-8c5b-5479df7cfe64")
-		)
-		(pin "2"
-			(uuid "1228a43e-b280-4538-9e26-e006b4b6d369")
-		)
-		(pin "1"
-			(uuid "33d3c000-3bd3-4b60-a778-892598cbdea9")
-		)
-		(pin "4"
-			(uuid "34c87e28-1f5a-4bb6-be8b-189ac2899af5")
+			(uuid "9c44e7db-e328-462e-8196-041c3bba9b6c")
 		)
 		(pin "14"
-			(uuid "38bd6f47-3cef-4bc2-9c9f-0b5495eb89e5")
-		)
-		(pin "9"
-			(uuid "7113fb88-6935-491a-8c42-5bfc3ef49b71")
-		)
-		(pin "5"
-			(uuid "cdc135fd-4e1b-465f-973c-c6e12cf066c1")
+			(uuid "4b89ec03-cbb0-4d5c-9f7d-c4a999748d6f")
 		)
 		(pin "7"
-			(uuid "d5714e99-5110-481e-9fcf-7574fc4dba7e")
-		)
-		(pin "6"
-			(uuid "6b18710a-128e-4204-940a-8b7a30fc0632")
-		)
-		(pin "11"
-			(uuid "1446c9b1-f97c-421d-90e1-2aaa36fefd52")
-		)
-		(pin "8"
-			(uuid "6e5974f3-478a-4149-bd12-55e8f8fcddcd")
+			(uuid "6aa9908f-f32e-4b53-8f95-6932004fd90f")
 		)
 		(pin "10"
-			(uuid "c8e7af59-54fc-44c6-b21f-b5a14c7f3bc4")
+			(uuid "f848cc0d-be9f-4225-b003-30bfd3f712da")
+		)
+		(pin "4"
+			(uuid "c60c917b-3e58-4673-8294-fb461e76a708")
+		)
+		(pin "6"
+			(uuid "7311923e-a2f8-4abe-80ef-17cb9e67ed4f")
+		)
+		(pin "12"
+			(uuid "ecee99dc-ba14-4351-8082-ad0e1fe31082")
+		)
+		(pin "8"
+			(uuid "091dfe2e-bbdc-4b53-b481-e4de45115baf")
+		)
+		(pin "1"
+			(uuid "feac586b-c576-4368-8528-2d8b35015b5f")
+		)
+		(pin "5"
+			(uuid "04081151-4c87-436a-b255-9217d1ac5267")
+		)
+		(pin "9"
+			(uuid "a088f0f8-ae9b-4009-bc05-632c110be2c5")
+		)
+		(pin "2"
+			(uuid "2c0f2196-88b6-4742-93b1-5e260fb46ae9")
+		)
+		(pin "3"
+			(uuid "c73a9218-b5b8-4b14-9a3e-b9d421198a62")
 		)
 		(instances
-			(project "turing_machine"
+			(project ""
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
-					(reference "U4")
+					(reference "U2")
+					(unit 5)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "74xx:74LS00")
+		(at 50.8 54.61 0)
+		(unit 4)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "bfc1211e-a96d-4333-974c-6bedd64dafb1")
+		(property "Reference" "U2"
+			(at 50.7917 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "74LS00"
+			(at 50.7917 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_DIP:DIP-14_W7.62mm"
+			(at 50.8 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/gpn/sn74ls00"
+			(at 50.8 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "quad 2-input NAND gate"
+			(at 50.8 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "11"
+			(uuid "2b30409b-febf-417f-a962-b6573ac566ac")
+		)
+		(pin "13"
+			(uuid "9c44e7db-e328-462e-8196-041c3bba9b6c")
+		)
+		(pin "14"
+			(uuid "4b89ec03-cbb0-4d5c-9f7d-c4a999748d6f")
+		)
+		(pin "7"
+			(uuid "6aa9908f-f32e-4b53-8f95-6932004fd90f")
+		)
+		(pin "10"
+			(uuid "f848cc0d-be9f-4225-b003-30bfd3f712da")
+		)
+		(pin "4"
+			(uuid "c60c917b-3e58-4673-8294-fb461e76a708")
+		)
+		(pin "6"
+			(uuid "7311923e-a2f8-4abe-80ef-17cb9e67ed4f")
+		)
+		(pin "12"
+			(uuid "ecee99dc-ba14-4351-8082-ad0e1fe31082")
+		)
+		(pin "8"
+			(uuid "091dfe2e-bbdc-4b53-b481-e4de45115baf")
+		)
+		(pin "1"
+			(uuid "feac586b-c576-4368-8528-2d8b35015b5f")
+		)
+		(pin "5"
+			(uuid "04081151-4c87-436a-b255-9217d1ac5267")
+		)
+		(pin "9"
+			(uuid "a088f0f8-ae9b-4009-bc05-632c110be2c5")
+		)
+		(pin "2"
+			(uuid "2c0f2196-88b6-4742-93b1-5e260fb46ae9")
+		)
+		(pin "3"
+			(uuid "c73a9218-b5b8-4b14-9a3e-b9d421198a62")
+		)
+		(instances
+			(project ""
+				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
+					(reference "U2")
 					(unit 4)
 				)
 			)
@@ -10571,6 +10828,12 @@
 			(uuid "9390e13f-d922-4520-a156-bd7a20dc45e6")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR037")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR057")
@@ -10641,6 +10904,12 @@
 			(uuid "cb7b3c86-d5fd-4665-8881-4e278e111643")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "C10")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "C10")
@@ -10835,6 +11104,12 @@
 			(uuid "ec7722d3-f4cc-478a-b6ee-40e9e361643d")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "J1")
+					(unit 1)
+				)
+			)
 			(project ""
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "J1")
@@ -10901,6 +11176,12 @@
 			(uuid "45ee95c0-4751-4e22-9821-a80ef3999741")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR03")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR023")
@@ -10971,6 +11252,12 @@
 			(uuid "5f205bf5-b483-40d4-9f78-c1ceefc41597")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "C17")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "C17")
@@ -11037,6 +11324,12 @@
 			(uuid "3bfbfc31-dd84-4637-90cf-877b11eac0d8")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR08")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR028")
@@ -11071,7 +11364,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_DIP:DIP-14_W7.62mm"
 			(at 60.96 87.63 0)
 			(effects
 				(font
@@ -11141,6 +11434,12 @@
 			(uuid "df862c50-216c-4fb7-bfce-6e07e2bc5746")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "U2")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "U1")
@@ -11211,6 +11510,12 @@
 			(uuid "94324240-efec-4d69-aa9d-e1e8e8d85440")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "C11")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "C11")
@@ -11281,6 +11586,12 @@
 			(uuid "6cdb4112-3460-4eda-ab6e-90ed3842d4a3")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "C12")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "C12")
@@ -11347,6 +11658,12 @@
 			(uuid "6a8ea6cb-239b-4b9c-b4b4-1802b7cc9df3")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR027")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR047")
@@ -11413,6 +11730,12 @@
 			(uuid "a567974d-5c42-4b80-a5e6-0dd0d57393e3")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR035")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR055")
@@ -11479,6 +11802,12 @@
 			(uuid "feb7f261-7649-4349-bc7a-86d58d4e41d4")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR016")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR036")
@@ -11546,6 +11875,12 @@
 			(uuid "578ed3dc-fed3-4354-ad0c-b5d62e017acf")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR046")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR066")
@@ -11612,6 +11947,12 @@
 			(uuid "86cc9bf2-2eaf-48ec-9340-18cb1e1ce0ab")
 		)
 		(instances
+			(project "exestatepower"
+				(path "/a856ccfb-6834-4764-8b12-9296d20f20f8"
+					(reference "#PWR015")
+					(unit 1)
+				)
+			)
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/14de9027-98ad-494f-868a-ee5ecea16656"
 					(reference "#PWR035")
@@ -11620,4 +11961,10 @@
 			)
 		)
 	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
 )
