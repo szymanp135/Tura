@@ -13438,7 +13438,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_DIP:DIP-32_W15.24mm_Socket"
+		(property "Footprint" "Package_DIP:DIP-32_W15.24mm"
 			(at 60.96 115.57 0)
 			(effects
 				(font
@@ -14888,7 +14888,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_DIP:DIP-32_W15.24mm_Socket"
+		(property "Footprint" "Package_DIP:DIP-32_W15.24mm"
 			(at 153.67 115.57 0)
 			(effects
 				(font
@@ -15264,7 +15264,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_DIP:DIP-32_W15.24mm_Socket"
+		(property "Footprint" "Package_DIP:DIP-32_W15.24mm"
 			(at 207.01 115.57 0)
 			(effects
 				(font
