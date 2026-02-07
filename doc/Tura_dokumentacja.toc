@@ -6,5 +6,6 @@
 \contentsline {subsection}{\numberline {3.2}Opis Szczegółowy}{5}{}%
 \contentsline {subsubsection}{\numberline {3.2.1}Moduły}{5}{}%
 \contentsline {subsubsection}{\numberline {3.2.2}Sygnały}{6}{}%
-\contentsline {subsubsection}{\numberline {3.2.3}Interfejs zewnętrzny}{9}{}%
+\contentsline {subsubsection}{\numberline {3.2.3}Interfejs zewnętrzny}{10}{}%
 \contentsline {subsubsection}{\numberline {3.2.4}Programowanie}{11}{}%
+\contentsline {section}{\numberline {4}Fizyczny Opis Działania}{11}{}%

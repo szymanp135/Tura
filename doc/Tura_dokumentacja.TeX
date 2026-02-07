@@ -7,8 +7,8 @@
 
 \setlength{\parindent}{0pt}
 
-\title{Tura}
-\author{smażalnia małp}
+\title{\huge{\textbf{Tura}} \\ \large{Fizyczna implementacja maszyny Turinga}}
+\author{Paweł Szymański}
 \date{Luty 2026}
 
 \begin{document}
@@ -91,7 +91,8 @@
 		\item[\texttt{Q\textsubscript{0...7}}] -- Magistrala stanu;
 		\item[\texttt{QR\textsubscript{0...7}}] -- Magistrala stanu zapisanego w \texttt{STATE REGISTER};
 		\item[\texttt{H\textsubscript{0...15}}] -- Magistrala z wartością licznika \texttt{HEADER POSITION};
-		\item[\texttt{CLK}] -- Sygnał zegarowy wyznaczający rytm pracy; każda zmiana sygnału ze stanu niskiego do wysokiego powoduje przejście \texttt{STEP EXECUTION STATE REGISTER} do następnego stanu;
+		\item[\texttt{CLK}] -- Sygnał zegarowy wyznaczający rytm pracy; każda zmiana sygnału ze stanu niskiego do wysokiego powoduje przejście \texttt{STEP EXECUTION STATE REGISTER} do następnego stanu; działa pod warunkiem aktywnego sygnału \texttt{CLK\_EN};
+		\item[\texttt{CLK\_EN}] -- Kontroluje dopływ sygnału \texttt{CLK} do \texttt{STEP EXECUTION STATE REGISER};
 		\item[\texttt{DIR}] -- Ustala kierunek zmiany wartości \texttt{HEADER POSITION}. Wysoki stan sygnału znaczy inkrementację, niski stan dekrementację;
 		\item[\texttt{HP\_EN}] -- Dopuszcza możliwość zmiany wartości \texttt{HEADER POSITION};
 		\item[\texttt{HP\_EN\_CLK}] -- sygnał \texttt{HP\_EN} połączony koniunkcją z zegarem:\\ $\texttt{HP\_EN\_CLK} = \texttt{HP\_EN} \cdot \texttt{CLK}$; synchronizuje zmianę wartości \texttt{HEADER POSITION} z zegarem;
@@ -99,19 +100,24 @@
 		\item[\texttt{DIR\_DOWN}] -- Decyduje o dekrementacji wartości \texttt{HEADER POSITION}; działa przy przejściu ze stanu niskiego do wysokiego;
 		\item[$\overline{\texttt{RESET}}$] -- Resetuje urządzenie, czyli ustawia \texttt{STEP EXECUTION STATE REGISTER} do stanu $0$ oraz ustawia licznik \texttt{HEADER POSITION} na $0$;
 		\item[$\overline{\texttt{PROGRAM}}$] -- Ustala tryb pracy. Poziom niski sygnału oznacza tryb programowania maszyny, poziom wysoki zaś tryb wykonywania programu;
+		\item[\texttt{PROGRAM}] -- Przeciwieństwo sygnału $\overline{\texttt{PROGRAM}}$; sygnał ten jest równoważny $\overline{\texttt{OPERATE}}$ -- podany został jedynie dla czytelności schematu;
 		\item[$\overline{\texttt{OPERATE}}$] -- Przeciwieństwo sygnału $\overline{\texttt{PROGRAM}}$. Niski poziom oznacza pracę urządzenia;
-		\item[\texttt{DDIR}] -- Ustala kierunek przepływu danych przez bufory \texttt{U15} i \texttt{U17} na magistralę \texttt{D\textsubscript{0...7}}. Wysoki poziom sygnału oznacza zapis danych z zewnątrz do bloków pamięci wewnątrz urządzenia. Niski poziom odczyt;
+		\item[\texttt{DDIR}] -- Ustala kierunek przepływu danych z wewnętrznych modułów wybranych sygnałami \texttt{CS\textsubscript{0}}, \texttt{CS\textsubscript{1}} na magistralę \texttt{D\textsubscript{0...7}}. Wysoki poziom sygnału oznacza zapis danych z inteferjsu zewnętrznego do bloków pamięci wewnątrz urządzenia. Niski poziom oznacza odczyt;
+		\item[\texttt{CS\textsubscript{0}}, \texttt{CS\textsubscript{1}}] -- Kombinacja tych sygnałów wybiera wewnętrzny moduł do odczytu/zapisu danych z zewnętrznego interferjsu (kierunek zależny od \texttt{DDIR});
+		\item[$\overline{\texttt{DT}}$] -- Włącza przesył danych między wewnętrznymi modułami a intefrejsem zewnętrznym; aktywny dla niskiego poziomu;
 		\item[\texttt{TSR\_WR}] -- Zapisuje dane z magistrali taśmy \texttt{S\textsubscript{0...6}} do \texttt{TAPE SYMBOL REGISTER}; zapis odbywa się podczas przejścia sygnału ze stanu niskiego do wysokiego;
 		\item[\texttt{SR\_WR}] -- Zapisuje dane z magistrali stanu \texttt{Q\textsubscript{0...7}} do \texttt{STATE REGISER}; zapis odbywa się podczas przejścia sygnału ze stanu niskiego do wysokiego;
 		\item[\texttt{T\_$\overline{\texttt{OE}}$}] -- Włącza wyjście danych z \texttt{TAPE} na magistralę \texttt{S\textsubscript{0...6}}; aktywny dla niskiego poziomu;
 		\item[\texttt{T\_$\overline{\texttt{WE}}$}] -- Włącza zapis danych w \texttt{TAPE} z magistrali \texttt{S\textsubscript{0...6}}; aktywny dla niskiego poziomu;
-		\item[\texttt{SYT\_$\overline{\texttt{OE}}$}] -- Włącza wyjście danych z \texttt{SYMBOL TRANSLATOR}; aktywny dla niskiego poziomu;
-		\item[\texttt{SYT\_$\overline{\texttt{WE}}$}] -- Włącza zapis danych w \texttt{SYMBOL TRANSLATOR}; aktywny dla niskiego poziomu;
-		\item[\texttt{STT\_$\overline{\texttt{OE}}$}] -- Włącza wyjście danych z \texttt{STATE TRANSLATOR}; aktywny dla niskiego poziomu;
-		\item[\texttt{STT\_$\overline{\texttt{WE}}$}] -- Włącza zapis danych w \texttt{STATE TRANSLATOR}; aktywny dla niskiego poziomu;
-		\item[\texttt{QR\_$\overline{\texttt{OE}}$}] -- Włącza wyjście danych z \texttt{STATE REGISTER}; aktywny dla niskiego poziomu;
-		\item[\texttt{T\_$\overline{\texttt{*E}}$\_E}, \texttt{SYT\_$\overline{\texttt{*E}}$\_E}, \texttt{ST\_$\overline{\texttt{*E}}$\_E}, \texttt{QR\_$\overline{\texttt{OE}}$\_E}] -- Sygnały odpowiadające tym bez sufiksu ,,\texttt{\_E}'', będące połączone z nimi przez bufor \texttt{U19} oraz będące wyprowadzeniem do interfejsu zewnętrznego;
-		\item[\texttt{T\_$\overline{\texttt{*E}}$\_B}, \texttt{SYT\_$\overline{\texttt{OE}}$\_B}, \texttt{STT\_$\overline{\texttt{OE}}$\_B}, \texttt{DIR\_B}] -- Sygnały odpowiadające tym bez sufiksu ,,\texttt{\_B}'', będące połączone z nimi przez bufor \texttt{U18}. Są one sygnałami generowanymi przez maszynę podczas obliczeń potrzebnymi do poprawnej jej samodzielnej pracy;
+		\item[\texttt{SYT\_$\overline{\texttt{OE}}$}] -- Włącza wyjście danych z \texttt{SYMBOL TRANSLATOR} na magistralę \texttt{S\textsubscript{0...6}} oraz sygnał \texttt{DIR\_B}; aktywny dla niskiego poziomu;
+		\item[\texttt{SYT\_$\overline{\texttt{WE}}$}] -- Włącza zapis danych w \texttt{SYMBOL TRANSLATOR} z magistrali \texttt{S\textsubscript{0...6}} oraz sygnału \texttt{DIR\_B}; aktywny dla niskiego poziomu;
+		\item[\texttt{STT\_$\overline{\texttt{OE}}$}] -- Włącza wyjście danych z \texttt{STATE TRANSLATOR} na magistralę \texttt{Q\textsubscript{0...7}}; aktywny dla niskiego poziomu;
+		\item[\texttt{STT\_$\overline{\texttt{WE}}$}] -- Włącza zapis danych w \texttt{STATE TRANSLATOR} z magistrali \texttt{Q\textsubscript{0...7}}; aktywny dla niskiego poziomu;
+		\item[\texttt{QR\_$\overline{\texttt{OE}}$}] -- Włącza wyjście danych z \texttt{STATE REGISTER} na magistralę \texttt{D\textsubscript{0...7}}; aktywny dla niskiego poziomu;
+		\item[\texttt{T\_$\overline{\texttt{*E}}$\_E}, \texttt{SYT\_$\overline{\texttt{*E}}$\_E}, \texttt{ST\_$\overline{\texttt{*E}}$\_E}, \texttt{QR\_$\overline{\texttt{OE}}$\_E}] -- Sygnały odpowiadające tym bez sufiksu ,,\texttt{\_E}'', będące połączone z nimi przez bufor \texttt{U18} oraz będące wynikiem dekodera wyboru funkcji \texttt{U19};
+		\item[\texttt{T\_$\overline{\texttt{*E}}$\_B}, \texttt{SYT\_$\overline{\texttt{OE}}$\_B}, \texttt{STT\_$\overline{\texttt{OE}}$\_B}, \texttt{DIR\_B}] -- Sygnały odpowiadające tym bez sufiksu ,,\texttt{\_B}'', będące połączone z nimi przez bufor \texttt{U17}. Są one sygnałami generowanymi przez maszynę podczas obliczeń potrzebnymi do poprawnej jej samodzielnej pracy;
+		\item[$\overline{\texttt{SYMB\_BUF}}$] -- Włącza przepływ danych z \texttt{TAPE} lub \texttt{SYMBOL TRANSLATOR} na magistralę \texttt{D\textsubscript{0...7}}; aktywny dla niskiego poziomu;
+		\item[$\overline{\texttt{STAT\_BUF}}$] -- Włącza przepływ danych ze \texttt{STATE TRANSLATOR} na magistralę \texttt{D\textsubscript{0...7}}; aktywny dla niskiego poziomu;
 		\item[$\overline{\texttt{FINISH\_STATE}}$] -- Informuje o osiągnięciu przez maszynę stanu akceptującego i zarazem zatrzymującego pracę; aktywny dla niskiego poziomu.
 		\item[\texttt{SEST\_STATE}] -- Wskazuje obecny stan \texttt{STEP EXECUTION STATE REGISTER};
 	\end{description}
@@ -132,14 +138,6 @@
 			10 & $\overline{\texttt{RESET}}$ & In \\ \hline
 			11 & $\overline{\texttt{PROGRAM}}$ & In \\ \hline
 			12 & \texttt{DDIR} & In \\ \hline
-			13 & \texttt{T\_}$\overline{\texttt{OE}}$\texttt{\_E} & In \\ \hline
-			14 & \texttt{T\_}$\overline{\texttt{WE}}$\texttt{\_E} & In \\ \hline
-			15 & \texttt{SYT\_}$\overline{\texttt{OE}}$\texttt{\_E} & In \\ \hline
-			16 & \texttt{SYT\_}$\overline{\texttt{WE}}$\texttt{\_E} & In \\ \hline
-			17 & \texttt{STT\_}$\overline{\texttt{OE}}$\texttt{\_E} & In \\ \hline
-			18 & \texttt{STT\_}$\overline{\texttt{WE}}$\texttt{\_E} & In \\ \hline
-			19 & \texttt{QR\_}$\overline{\texttt{OE}}$\texttt{\_E} & In \\ \hline
-			20 & $\overline{\texttt{FINISH\_STATE}}$ & Out \\ \hline
 		\end{tblr}
 		\caption{Lista sygnałów interfejsu zewnętrznego}
 		\label{tab:extinterfacetable}
@@ -150,8 +148,11 @@
 		\begin{tblr}{||c|c|c||}
 			\hline
 			\textbf{Num. wyjścia} & \textbf{Sygnały} & \textbf{Kierunek} \\ \hline
-			21,23,25 & \texttt{Vcc} & --- \\ \hline
-			22,24,26 & \texttt{Vss} & --- \\ \hline
+			13-14 & \texttt{CS\textsubscript{0,1}} & In \\ \hline
+			15 & $\overline{\texttt{DT}}$ & In \\ \hline
+			16 & $\overline{\texttt{FINISH\_STATE}}$ & Out \\ \hline
+			17,19,21,23,25 & \texttt{Vcc} & --- \\ \hline
+			18,20,22,24,26 & \texttt{Vss} & --- \\ \hline
 			27-42 & \texttt{H\textsubscript{0...15}} & Out \\ \hline
 			43 & \texttt{SESR\_STATE} & Out \\ \hline
 			44 & \texttt{Vss} & --- \\ \hline
@@ -160,6 +161,8 @@
 	\end{table}
 	
 	\subsubsection{Programowanie}
-	Programowanie 
+	Programowanie maszyny odbywa się za pomocą interfejsu zewnętrznego. Dzięki odpowiedniemu wykorzystaniu udostępnionych sygnałów
+	
+	\section{Fizyczny Opis Działania}
 	
 \end{document}
