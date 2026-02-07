@@ -14140,7 +14140,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_Edge:Connector_Edge_2x22pin_odd"
 			(at 234.95 69.85 0)
 			(effects
 				(font
