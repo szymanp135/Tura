@@ -4,8 +4,10 @@
 \usepackage[polish]{babel}
 \usepackage{tabularray}
 \usepackage{graphicx} % Required for inserting images
+\usepackage{tikz-timing}
 
 \setlength{\parindent}{0pt}
+\usetikztiminglibrary[new={char=Q,reset char=R}]{counters}
 
 \title{\huge{\textbf{Tura}} \\ \large{Fizyczna implementacja maszyny Turinga}}
 \author{Paweł Szymański}
@@ -66,17 +68,17 @@
 	\subsubsection{Moduły}
 	Maszyna została podzielona na 11 modułów w celu oznakowania jednostek odpowiedzialnych za poszczególne funkcje. Moduły w schematach KiCad zostały otoczone ciemnożłółtymi ramkami i podpisane niebieskim tekstem lub jedynie podpisane niebieskim tekstem w przypadku modułów jednoelementowych.
 	\begin{description}
-		\item[\texttt{TAPE}] -- Blok pamięci symulujący taśmę. Każda komórka pamięci reprezentuje jeden symbol taśmy. Pojedynczy symbol taśmy składa się z 7 bitów (\texttt{D\textsubscript{0...6}});
-		\item[\texttt{TAPE SYMBOL REGISTER}] -- Rejestr przechowujący jeden symbol taśmy. Jest on potrzebny do chwilowego przechowania odczytanego symbolu na czas zapisu nowego do taśmy;
-		\item[\texttt{SYMBOL TRANSLATOR}] -- Blok pamięci symulujący funkcję przejścia dla zadanego symbolu oraz stanu zwracającą wynik w formie symbolu taśmy (7 bitów) oraz kierunku ruchu głowicy (1 bit);
-		\item[\texttt{STATE TRANSLATOR}] -- Blok pamięci symulujący funkcję przejścia dla zadanego symbolu oraz stanu zwracającą wynik w formie stanu (8 bitów);
+		\item[\texttt{TAPE}] -- Blok pamięci symulujący taśmę. Każda komórka pamięci reprezentuje jeden symbol taśmy. Pojedynczy symbol taśmy składa się z 7 bitów;
+		\item[\texttt{TAPE SYMBOL REGISTER}] -- Rejestr przechowujący jeden symbol taśmy. Jest on potrzebny do chwilowego przechowania odczytanego symbolu na czas zapisu nowego do \texttt{TAPE};
+		\item[\texttt{SYMBOL TRANSLATOR}] -- Blok pamięci symulujący funkcję przejścia dla zadanego symbolu oraz stanu zwracający wynik w formie symbolu taśmy (7 bitów) oraz kierunku ruchu głowicy (1 bit);
+		\item[\texttt{STATE TRANSLATOR}] -- Blok pamięci symulujący funkcję przejścia dla zadanego symbolu oraz stanu zwracający wynik w formie stanu (8 bitów);
 		\item[\texttt{STATE REGISTER}] -- Rejestr przechowujący obecny stan maszyny;
-		\item[\texttt{HEADER POSITION}] -- Zbiór liczników binarnych z możliwością inkrementacji oraz dekrementacji symulujący głowicę maszyny. Wartość licznika reprezentuje usytuowanie głowicy na taśmie;
+		\item[\texttt{HEADER POSITION}] -- Zbiór liczników binarnych z możliwością inkrementacji oraz dekrementacji reprezentujący usytuowanie głowicy na taśmie (wskazuje obecnie wybrany symbol w \texttt{TAPE});
 		\item[\texttt{HEADER POSITION DIRECTION DISASSEMBLY}] -- Prosty multiplekser sygnału zmiany wartości \texttt{HEADER POSITION} w zależności od kierunku zmiany;
-		\item[\texttt{HEADER POSITION CLOCK SYNCHRONIZATION}] -- Bramka AND synchronizująca operację zmiany wartości \texttt{HEADER POSITION} z zegarem;
+		\item[\texttt{HEADER POSITION CLOCK SYNCHRONIZATION}] -- Bramka AND synchronizująca sygnał zmiany wartości \texttt{HEADER POSITION} z zegarem;
 		\item[\texttt{STEP EXECUTION STATE REGISTER}] -- Rejestr przechowujący obecny stan wykonywania ruchu maszyny. Ze względu na brak praktycznego rozwiązania jednoczesnego odczytu i zapisu symbolu taśmy, przeprowadzenie przejścia zostało podzielone na dwa ruchy rozdzielające te operacje; stąd dwa stany wykonania ruchu;
-		\item[\texttt{IN-PROGRAM CONTROL LINES BUFFERS}] -- Zestaw buforów oddzielający kontrolne linie sygnałowe interfejsu zewnętrznego od tych wewnęrznych;
-		\item[\texttt{IN-OPERATION CONTROL LINES BUFFER}] -- Bufor oddzielający wewnętrzne linie kontrolne od tych generowanych przez urządzenie podczas pracy. Rozdzielenie to jest potrzebne w celu umożliwienia programowania maszyny (dostępu sygnałów zewnętrznych do wewnętrznych);
+		\item[\texttt{IN-PROGRAM CONTROL LINES BUFFERS}] -- Zestaw buforów oddzielający kontrolne linie sygnałowe generowane przez interfejs zewnętrzny od tych wewnęrznych;
+		\item[\texttt{IN-OPERATION CONTROL LINES BUFFER}] -- Bufor oddzielający wewnętrzne linie kontrolne od tych generowanych przez urządzenie podczas pracy; %Rozdzielenie to jest potrzebne w celu umożliwienia programowania maszyny (dostępu sygnałów zewnętrznych do wewnętrznych);
 	\end{description}
 	
 	\subsubsection{Sygnały}
@@ -95,35 +97,35 @@
 		\item[\texttt{CLK\_EN}] -- Kontroluje dopływ sygnału \texttt{CLK} do \texttt{STEP EXECUTION STATE REGISER};
 		\item[\texttt{DIR}] -- Ustala kierunek zmiany wartości \texttt{HEADER POSITION}. Wysoki stan sygnału znaczy inkrementację, niski stan dekrementację;
 		\item[\texttt{HP\_EN}] -- Dopuszcza możliwość zmiany wartości \texttt{HEADER POSITION};
-		\item[\texttt{HP\_EN\_CLK}] -- sygnał \texttt{HP\_EN} połączony koniunkcją z zegarem:\\ $\texttt{HP\_EN\_CLK} = \texttt{HP\_EN} \cdot \texttt{CLK}$; synchronizuje zmianę wartości \texttt{HEADER POSITION} z zegarem;
+		\item[\texttt{HP\_EN\_CLK}] -- sygnał \texttt{HP\_EN} zsynchronizowany z zegarem (\texttt{CLK}): $\texttt{HP\_EN\_CLK} = \texttt{HP\_EN} \cdot \texttt{CLK}$; synchronizuje zmianę wartości \texttt{HEADER POSITION} z zegarem;
 		\item[\texttt{DIR\_UP}] -- Decyduje o inkrementacji wartości \texttt{HEADER POSITION}; działa przy przejściu ze stanu niskiego do wysokiego;
 		\item[\texttt{DIR\_DOWN}] -- Decyduje o dekrementacji wartości \texttt{HEADER POSITION}; działa przy przejściu ze stanu niskiego do wysokiego;
-		\item[$\overline{\texttt{RESET}}$] -- Resetuje urządzenie, czyli ustawia \texttt{STEP EXECUTION STATE REGISTER} do stanu $0$ oraz ustawia licznik \texttt{HEADER POSITION} na $0$;
+		\item[$\overline{\texttt{RESET}}$] -- Resetuje urządzenie, czyli ustawia \texttt{STEP EXECUTION STATE REGISTER} do stanu $0$ oraz ustawia wartość \texttt{HEADER POSITION} na $0$;
 		\item[$\overline{\texttt{PROGRAM}}$] -- Ustala tryb pracy. Poziom niski sygnału oznacza tryb programowania maszyny, poziom wysoki zaś tryb wykonywania programu;
 		\item[\texttt{PROGRAM}] -- Przeciwieństwo sygnału $\overline{\texttt{PROGRAM}}$; sygnał ten jest równoważny $\overline{\texttt{OPERATE}}$ -- podany został jedynie dla czytelności schematu;
 		\item[$\overline{\texttt{OPERATE}}$] -- Przeciwieństwo sygnału $\overline{\texttt{PROGRAM}}$. Niski poziom oznacza pracę urządzenia;
-		\item[\texttt{DDIR}] -- Ustala kierunek przepływu danych z wewnętrznych modułów wybranych sygnałami \texttt{CS\textsubscript{0}}, \texttt{CS\textsubscript{1}} na magistralę \texttt{D\textsubscript{0...7}}. Wysoki poziom sygnału oznacza zapis danych z inteferjsu zewnętrznego do bloków pamięci wewnątrz urządzenia. Niski poziom oznacza odczyt;
+		\item[\texttt{DDIR}] -- Ustala kierunek przepływu danych z wewnętrznych modułów wybranych sygnałami \texttt{CS\textsubscript{0}}, \texttt{CS\textsubscript{1}} na magistralę \texttt{D\textsubscript{0...7}}. Wysoki poziom sygnału oznacza zapis danych z inteferjsu zewnętrznego do modułów wewnątrz urządzenia. Niski poziom oznacza odczyt;
 		\item[\texttt{CS\textsubscript{0}}, \texttt{CS\textsubscript{1}}] -- Kombinacja tych sygnałów wybiera wewnętrzny moduł do odczytu/zapisu danych z zewnętrznego interferjsu (kierunek zależny od \texttt{DDIR});
 		\item[$\overline{\texttt{DT}}$] -- Włącza przesył danych między wewnętrznymi modułami a intefrejsem zewnętrznym; aktywny dla niskiego poziomu;
-		\item[\texttt{TSR\_WR}] -- Zapisuje dane z magistrali taśmy \texttt{S\textsubscript{0...6}} do \texttt{TAPE SYMBOL REGISTER}; zapis odbywa się podczas przejścia sygnału ze stanu niskiego do wysokiego;
+		\item[\texttt{TSR\_WR}] -- Zapisuje dane z magistrali symbolu taśmy \texttt{S\textsubscript{0...6}} do \texttt{TAPE SYMBOL REGISTER}; zapis odbywa się podczas przejścia sygnału ze stanu niskiego do wysokiego;
 		\item[\texttt{SR\_WR}] -- Zapisuje dane z magistrali stanu \texttt{Q\textsubscript{0...7}} do \texttt{STATE REGISER}; zapis odbywa się podczas przejścia sygnału ze stanu niskiego do wysokiego;
 		\item[\texttt{T\_$\overline{\texttt{OE}}$}] -- Włącza wyjście danych z \texttt{TAPE} na magistralę \texttt{S\textsubscript{0...6}}; aktywny dla niskiego poziomu;
 		\item[\texttt{T\_$\overline{\texttt{WE}}$}] -- Włącza zapis danych w \texttt{TAPE} z magistrali \texttt{S\textsubscript{0...6}}; aktywny dla niskiego poziomu;
 		\item[\texttt{SYT\_$\overline{\texttt{OE}}$}] -- Włącza wyjście danych z \texttt{SYMBOL TRANSLATOR} na magistralę \texttt{S\textsubscript{0...6}} oraz sygnał \texttt{DIR\_B}; aktywny dla niskiego poziomu;
 		\item[\texttt{SYT\_$\overline{\texttt{WE}}$}] -- Włącza zapis danych w \texttt{SYMBOL TRANSLATOR} z magistrali \texttt{S\textsubscript{0...6}} oraz sygnału \texttt{DIR\_B}; aktywny dla niskiego poziomu;
-		\item[\texttt{STT\_$\overline{\texttt{OE}}$}] -- Włącza wyjście danych z \texttt{STATE TRANSLATOR} na magistralę \texttt{Q\textsubscript{0...7}}; aktywny dla niskiego poziomu;
+		\item[\texttt{STT\_$\overline{\texttt{OE}}$}] -- Włącza wyjście danych ze \texttt{STATE TRANSLATOR} na magistralę \texttt{Q\textsubscript{0...7}}; aktywny dla niskiego poziomu;
 		\item[\texttt{STT\_$\overline{\texttt{WE}}$}] -- Włącza zapis danych w \texttt{STATE TRANSLATOR} z magistrali \texttt{Q\textsubscript{0...7}}; aktywny dla niskiego poziomu;
-		\item[\texttt{QR\_$\overline{\texttt{OE}}$}] -- Włącza wyjście danych z \texttt{STATE REGISTER} na magistralę \texttt{D\textsubscript{0...7}}; aktywny dla niskiego poziomu;
+		\item[\texttt{QR\_$\overline{\texttt{OE}}$}] -- Włącza wyjście danych ze \texttt{STATE REGISTER} na magistralę \texttt{D\textsubscript{0...7}}; aktywny dla niskiego poziomu;
 		\item[\texttt{T\_$\overline{\texttt{*E}}$\_E}, \texttt{SYT\_$\overline{\texttt{*E}}$\_E}, \texttt{ST\_$\overline{\texttt{*E}}$\_E}, \texttt{QR\_$\overline{\texttt{OE}}$\_E}] -- Sygnały odpowiadające tym bez sufiksu ,,\texttt{\_E}'', będące połączone z nimi przez bufor \texttt{U18} oraz będące wynikiem dekodera wyboru funkcji \texttt{U19};
 		\item[\texttt{T\_$\overline{\texttt{*E}}$\_B}, \texttt{SYT\_$\overline{\texttt{OE}}$\_B}, \texttt{STT\_$\overline{\texttt{OE}}$\_B}, \texttt{DIR\_B}] -- Sygnały odpowiadające tym bez sufiksu ,,\texttt{\_B}'', będące połączone z nimi przez bufor \texttt{U17}. Są one sygnałami generowanymi przez maszynę podczas obliczeń potrzebnymi do poprawnej jej samodzielnej pracy;
-		\item[$\overline{\texttt{SYMB\_BUF}}$] -- Włącza przepływ danych z \texttt{TAPE} lub \texttt{SYMBOL TRANSLATOR} na magistralę \texttt{D\textsubscript{0...7}}; aktywny dla niskiego poziomu;
+		\item[$\overline{\texttt{SYMB\_BUF}}$] -- Włącza przepływ danych z \texttt{TAPE} lub \texttt{SYMBOL TRANSLATOR} (w zależności od wybranego urządzenia sygnałami \texttt{CS\textsubscript{0,1}}) na magistralę \texttt{D\textsubscript{0...7}}; aktywny dla niskiego poziomu;
 		\item[$\overline{\texttt{STAT\_BUF}}$] -- Włącza przepływ danych ze \texttt{STATE TRANSLATOR} na magistralę \texttt{D\textsubscript{0...7}}; aktywny dla niskiego poziomu;
 		\item[$\overline{\texttt{FINISH\_STATE}}$] -- Informuje o osiągnięciu przez maszynę stanu akceptującego i zarazem zatrzymującego pracę; aktywny dla niskiego poziomu.
 		\item[\texttt{SEST\_STATE}] -- Wskazuje obecny stan \texttt{STEP EXECUTION STATE REGISTER};
 	\end{description}
 	
 	\subsubsection{Interfejs zewnętrzny}
-	W celu zasilenia urządzenia oraz komunikacji zastosowany został zewnętrzny interfejs składający się z 20 wyjść sterujących, 17 informujacych o stanie maszyny oraz 7 zasilających. W sumie daje to 44 wyjścia. Wszystkie wspomniane sygnały (po za \texttt{Vcc} oraz \texttt{Vss}) zostały wyjaśnione w poprzednim podrozdziale. Wyjścia \texttt{Vcc} oraz \texttt{Vss} są wyjściami odpowiednio zasilania i uziemienia. \texttt{Vcc} powinno mieć napięcie +5V względem \texttt{Vss}. \\
+	W celu zasilenia urządzenia oraz komunikacji zastosowany został zewnętrzny interfejs składający się z 16 wyjść sterujących, 17 informujacych o stanie maszyny oraz 11 zasilających. W sumie daje to 44 wyjścia. Wszystkie wspomniane sygnały (po za \texttt{Vcc} oraz \texttt{Vss}) zostały wyjaśnione w poprzednim podrozdziale. Wyjścia \texttt{Vcc} oraz \texttt{Vss} są wyjściami odpowiednio zasilania i uziemienia. \texttt{Vcc} powinno mieć napięcie +5V względem \texttt{Vss}. \\
 	By uniknąć zbyt podobnych oznaczeń, kierunki sygnałów zamiast ,,Wej/Wyj'' zostały oznaczone angielskimi ,,In/Out''.
 	\newline \newline
 	\textbf{Tabela sygnałów interfejsu:}
@@ -138,16 +140,6 @@
 			10 & $\overline{\texttt{RESET}}$ & In \\ \hline
 			11 & $\overline{\texttt{PROGRAM}}$ & In \\ \hline
 			12 & \texttt{DDIR} & In \\ \hline
-		\end{tblr}
-		\caption{Lista sygnałów interfejsu zewnętrznego}
-		\label{tab:extinterfacetable}
-	\end{table}
-	\newpage
-	\begin{table}
-		\centering
-		\begin{tblr}{||c|c|c||}
-			\hline
-			\textbf{Num. wyjścia} & \textbf{Sygnały} & \textbf{Kierunek} \\ \hline
 			13-14 & \texttt{CS\textsubscript{0,1}} & In \\ \hline
 			15 & $\overline{\texttt{DT}}$ & In \\ \hline
 			16 & $\overline{\texttt{FINISH\_STATE}}$ & Out \\ \hline
@@ -157,11 +149,82 @@
 			43 & \texttt{SESR\_STATE} & Out \\ \hline
 			44 & \texttt{Vss} & --- \\ \hline
 		\end{tblr}
-		\caption{Lista sygnałów interfejsu zewnętrznego (cd.)}
+		\caption{Lista sygnałów interfejsu zewnętrznego}
+		\label{tab:extinterfacetable}
 	\end{table}
+	\newpage
 	
 	\subsubsection{Programowanie}
-	Programowanie maszyny odbywa się za pomocą interfejsu zewnętrznego. Dzięki odpowiedniemu wykorzystaniu udostępnionych sygnałów
+	Mając na uwadze czytelność dokumentacji zdecydowano o opisie stanu sygnałów w czasie w formie wykresu czasowego. Każdy rząd odpowiada konkretnemu sygnałowi; linia w rzędzie zmieniająca się między stanem wysokim a niskim oznacza stan sygnału w czasie. Każda kolumna wykresu przedstawia konkretny odcinek czasowy wraz ze stanami sygnałów w tym czasie. Sygnały zmieniane są podczas przejść między odcinkami czasowymi. 
+	\newline \newline
+	Programowanie maszyny odbywa się za pomocą interfejsu zewnętrznego. Dzięki odpowiedniemu wykorzystaniu udostępnionych sygnałów użytkownik jest w stanie manipulować zawartością bloków pamięci \texttt{TAPE}, \texttt{SYMBOL TRANSLATOR} oraz \texttt{STATE TRANSLATOR}.
+	\newline \newline
+	\textbf{Przygotowanie maszyny do programowania} \\
+	W celu rozpoczęcia programowania maszyny należy wpierw ją do tego przygotować. Zadanie to jest dość proste - wystarczy ustawić sygnał $\overline{\texttt{PROGRAM}}$ na 0, po czym puścić puls sygnału $\overline{\texttt{RESET}}$ w stanie również 0.
+	\begin{figure}[h!]
+		\begin{tikztimingtable}[
+			timing/slope=0.1,
+			timing/coldist=10pt,
+			xscale=2,yscale=2,
+			thick
+			]
+			$\overline{\texttt{PROGRAM}}$	& HLLLLLLLLLLLLLLLLL \\
+			$\overline{\texttt{RESET}}$		& HHLHHHHHHHHHHHHHHH \\		
+			\extracode
+			\begin{pgfonlayer}{background}
+				\begin{scope}[gray,semitransparent,semithick]
+					\vertlines{1,...,17}
+				\end{scope}
+				\begin{scope}[gray,semitransparent,semithick]
+					\horlines[dotted]{}
+				\end{scope}
+				\foreach \n in {1,2,...,\twidth}
+					\draw (\n-0.5,-\nrows-.8)
+						node [below,inner sep=2pt] {\scalebox{.75}{\tiny\n}};
+			\end{pgfonlayer}
+		\end{tikztimingtable}
+		\caption{Schemat czasowy przygotowania maszyny do programowania}
+		\label{fig:programprimer}
+	\end{figure}
+	
+	\textbf{Programowanie modułu \texttt{TAPE} (taśmy)} \\
+	Programowanie modułu \texttt{TAPE} zaczyna się przygotowaniem go do programowania, czyli wybraniem modułu, z użyciem sygnałów \texttt{CS\textsubscript{0,1}}, oraz wybraniem kierunku przepływu danych sygnałem \texttt{DDIR} (1 dla zapisu). \\
+	Następnie zapis słowa wejściowego taśmy odbywa się w pętli: ustala się sybol do zapisu na magistrali \texttt{D\textsubscript{0...7}}, aktywuje się moduł pulsem sygnału  $\overline{\texttt{DT}}$ oraz wysła się dwa pulsy zegara \texttt{CLK} w celu przejścia do następnej komórki pamięci przechowującej zawartość taśmy. \\
+	Na wykresie czasowym kolumny 1-2 reprezentują przygotowanie \texttt{TAPE} do programowania. 2-6 i 7-11 przedstawiają dwa pojedyncze zapisy symboli do dwóch kolejnych komórek pamięci w \texttt{TAPE}. Sygnały w kolumnach 13-17 zostały wykropkowane w celu oznaczenia wielokrotnego powielenia operacji zapisu symbolu.
+	\begin{figure}[h!]
+		\begin{tikztimingtable}[
+			timing/slope=0.1,
+			timing/coldist=10pt,
+			xscale=2,yscale=2,
+			thick
+			]
+			\texttt{CS\textsubscript{0}}	& ULLLLLLLLLLLLLLLLU \\
+			\texttt{CS\textsubscript{1}}	& ULLLLLLLLLLLLLLLLU \\
+			\texttt{DDIR}					& UHHHHHHHHHHHHHHHHU \\
+			\texttt{D\textsubscript{0...7}}	& UU DDDDD{}DDDDD{};[dotted]DDDDD{}; U \\
+			$\overline{\texttt{DT}}$		& HH HLHHH  HLHHH  ;[dotted]HLHHH; H \\
+			\texttt{CLK}					& HH HHLHL  HHLHL  ;[dotted]HHLHL; H \\
+			\extracode
+			\begin{pgfonlayer}{background}
+				\begin{scope}[gray,semitransparent,semithick]
+					\vertlines{1,...,17}
+				\end{scope}
+				\begin{scope}[darkgray,semitransparent,thick]
+					\vertlines{2,7,12,17}
+				\end{scope}
+				\begin{scope}[gray,semitransparent,semithick]
+					\horlines[dotted]{}
+				\end{scope}
+				\foreach \n in {1,2,...,\twidth}
+					\draw (\n-0.5,-\nrows-4.8)
+						node [below,inner sep=2pt] {\scalebox{.75}{\tiny\n}};
+			\end{pgfonlayer}
+		\end{tikztimingtable}
+		\caption{Schemat czasowy programowania \texttt{TAPE}}
+		\label{fig:programtape}
+	\end{figure}
+	
+	\textbf{Programowanie modułu \texttt{SYMBOL TRANSLATOR}}
 	
 	\section{Fizyczny Opis Działania}
 	
