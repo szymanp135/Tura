@@ -6,6 +6,7 @@
 \usepackage{graphicx} % Required for inserting images
 \usepackage{svg}
 \usepackage{tikz-timing}
+\usepackage{float}
 
 \makeatletter
 \renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
@@ -141,12 +142,12 @@
 	\end{description}
 	
 	\subsubsection{Interfejs zewnętrzny}
-	W celu zasilenia urządzenia oraz komunikacji zastosowany został zewnętrzny interfejs składający się z 16 wyjść sterujących, 17 informujacych o stanie maszyny oraz 11 zasilających. W sumie daje to 44 wyjścia. Wszystkie wspomniane sygnały (po za \texttt{Vcc} oraz \texttt{Vss}) zostały wyjaśnione w poprzednim podrozdziale. Wyjścia \texttt{Vcc} oraz \texttt{Vss} są wyjściami odpowiednio zasilania i uziemienia. \texttt{Vcc} powinno mieć napięcie +5V względem \texttt{Vss}. \\
+	W celu zasilenia urządzenia oraz komunikacji zastosowany został zewnętrzny interfejs w formie złącza krawędziowego. Składaja się on z 16 wyjść sterujących, 17 informujacych o stanie maszyny oraz 11 zasilających. W sumie daje to 44 wyjścia. Wszystkie wspomniane sygnały (po za \texttt{Vcc} oraz \texttt{Vss}) zostały wyjaśnione w poprzednim podrozdziale. Wyjścia \texttt{Vcc} oraz \texttt{Vss} są wyjściami odpowiednio zasilania i uziemienia. \texttt{Vcc} powinno mieć napięcie +5V względem \texttt{Vss}. \\
 	By uniknąć zbyt podobnych oznaczeń, kierunki sygnałów zamiast ,,Wej/Wyj'' zostały oznaczone angielskimi ,,In/Out''.
 	\newline \newline
 	\textbf{Tabela sygnałów interfejsu:}
 	\SetTblrInner{rowsep=4pt}
-	\begin{table}[h!]
+	\begin{table}[H]
 		\centering
 		\begin{tblr}{||c|c|c||}
 			\hline
@@ -163,7 +164,7 @@
 		\caption{Lista sygnałów interfejsu zewnętrznego}
 		\label{tab:extinterfacetable1}
 	\end{table}
-	\begin{table}[h!]
+	\begin{table}[H]
 		\centering
 		\begin{tblr}{||c|c|c||}
 			\hline
@@ -177,15 +178,39 @@
 		\caption{Lista sygnałów interfejsu zewnętrznego (cd.)}
 		\label{tab:extinterfacetable2}
 	\end{table}
-	\newpage
+	
+	Oprócz interfejsu zewnętrznego na urządzeniu znajdują się dwa dodatkowe złącza: J2 i J3. Służą one do odczytu wartości odpowiednio \texttt{TAPE SYMBOL REGISTER} oraz \texttt{STATE REGISTER} (złącza te są podłączone do tych modułów bezpośrednio).
 	
 	\subsubsection{Programowanie}
 	%Mając na uwadze czytelność dokumentacji zdecydowano o opisie stanu sygnałów w czasie w formie wykresu czasowego. Każdy rząd odpowiada konkretnemu sygnałowi; linia w rzędzie zmieniająca się między stanem wysokim a niskim oznacza stan sygnału w czasie. Każda kolumna wykresu przedstawia konkretny odcinek czasowy wraz ze stanami sygnałów w tym czasie. Odcinki nie mają ustalonego konkretnego czasu trwania, ani nie muszą trwać tyle samo, a mają bardziej na zasadzie pokazać kolejność wysłania sygnałów. Sygnały zmieniane są podczas przejść między odcinkami czasowymi. \newline \newline
 	Programowanie maszyny odbywa się za pomocą interfejsu zewnętrznego. Dzięki odpowiedniemu wykorzystaniu udostępnionych sygnałów użytkownik jest w stanie manipulować zawartością bloków pamięci \texttt{TAPE}, \texttt{SYMBOL TRANSLATOR} oraz \texttt{STATE TRANSLATOR}.
 	%\newline \newline
 	\paragraph{Przygotowanie maszyny do programowania}
-	W celu rozpoczęcia programowania maszyny należy wpierw ją do tego przygotować. Zadanie to jest dość proste - wystarczy ustawić sygnał $\overline{\texttt{PROGRAM}}$ na niski poziom, po czym puścić puls sygnału $\overline{\texttt{RESET}}$.
-	\begin{figure}[!htb]
+	W celu rozpoczęcia programowania maszyny należy wpierw ją do tego przygotować. Zadanie to jest dość proste - wystarczy ustawić sygnał $\overline{\texttt{PROGRAM}}$ na niski poziom, po czym puścić puls sygnału $\overline{\texttt{RESET}}$. Wykres czasowy znajduje się na stronie \pageref{fig:programprep}. na rysunku \ref{fig:programprep}.
+	
+	\paragraph{Programowanie modułu \texttt{TAPE} (taśmy)}
+	Programowanie modułu \texttt{TAPE} zaczyna się przygotowaniem go do programowania, czyli wybraniem modułu, z użyciem sygnałów \texttt{CS\textsubscript{0,1}}, ustaleniem kierunku przepływu danych sygnałem \texttt{DDIR} - poziom wysoki dla zapisu - oraz puszczeniem pulsu sygnału $\overline{\texttt{RESET}}$. \\
+	Następnie zapis słowa wejściowego taśmy odbywa się w pętli: ustala się sybol do zapisu na magistrali \texttt{D\textsubscript{0...6}} (proszę zwrócić uwagę na indeks 0...6 - symbol ma 7 bitów), aktywuje się przesył danych (w tym przypadku zapis) do modułu pulsem sygnału  $\overline{\texttt{DT}}$ oraz wysła się dwa pulsy zegara \texttt{CLK} w celu przejścia do następnej komórki pamięci przechowującej zawartość taśmy. Wykres czasowy znajduje się na stronie \pageref{fig:programtape}. na rysunku \ref{fig:programtape}.
+	
+	\paragraph{Programowanie modułu \texttt{SYMBOL TRANSLATOR}}
+	Podobnie jak w przypadku programowania \texttt{TAPE}, \texttt{SYMBOL TRANSLATOR} również należy przygotować do programowania. W tym celu trzeba wybrać jedynie kierunek \texttt{DDIR} oraz puścić puls sygnału $\overline{\texttt{RESET}}$. \\
+	Zapis pojedynczej wartości funkcji przejścia z wynikiem w postaci symbolu oraz kierunku przesunięcia głowicy jest bardziej skomplikowany w porównaniu do zapisu pojedynczego symbolu taśmy. Główny problem leży w określeniu, która wartość funkcji ma zostać wgrana do modułu, czyli która komórka pamięci ma być zapisana. Aby to sprecyzować należy dokonać zapisu w dwóch rejestrach, które bezpośrednio określają wskazywane miejsce w pamięci: \texttt{TAPE SYMBOL REGISTER} oraz \texttt{STATE REGISTER}. Te dwa rejestry odpowiadają argumentom funkcji przejścia: stanowi oraz symbolowi. \\
+	%Każdy z tych rejestrów ma nadpisywaną swoją zawartość podczas kolejnych pulsów zegara \texttt{CLK}. \\
+	Zatem, żeby wskazać miejsce w pamięci modułu \texttt{SYMBOL TRANSLATOR} do którego należy zapisać wartość, trzeba wpierw wysłać symbol będący jednym z argumentów funkcji przejścia na magistralę \texttt{D\textsubscript{0...6}}, wybrać wewnętrzną magistralę \texttt{S\textsubscript{0...6}} sygnałami \texttt{CS\textsubscript{0,1}} oraz wysłać puls zegara w celu zapisania wartości magistrali w \texttt{TAPE SYMBOL REGISTER}. Następnie trzeba wysłać stan będący drugim z argumentów funkcji przejścia na magistralę \texttt{D\textsubscript{0...7}}, wybrać wewnętrzną magistralę \texttt{Q\textsubscript{0...7}} sygnałami \texttt{CS\textsubscript{0,1}} oraz wysłać puls zegara w celu zapisania wartości magistrali w \texttt{STATE REGISTER}. \\
+	Po tym miejsce w pamięci modułu \texttt{SYMBOL TRANSLATOR} jest wybrane i można przystąpić do zapisu symbolu oraz kierunku wartości funkcji przejścia. Osiąga się to za pomocą wyboru modułu sygnałami \texttt{CS\textsubscript{0,1}}, umieszczeniu danych do zapisu na magistrali \texttt{D\textsubscript{0...7}} oraz puszczeniem pulsu sygnału. \\
+	W przypadku programowania wartości funkcji dla argumentu ze stanem akceptującym po wykonaniu zapisu do \texttt{STATE REGISTER} należy puścić puls sygnału $\overline{\texttt{RESET}}$ w celu wyjścia maszyny ze stanu zatrzymania pracy (zatrzymania wpływu zegara na przejścia między staniami \texttt{STEP EXECUTION STATE REGISTER}). Jednak można zauważyć, że programowanie tych przejść nie ma sensu ze względu na zatrzymanie pracy urządzenia zaraz po przejściu do stanu akceptującego. $\overline{\texttt{DT}}$. \\
+	Wykres czasowy znajduje się na stronie \pageref{fig:programsymbol}. na rysunku \ref{fig:programsymbol}.
+	
+	\paragraph{Programowanie modułu \texttt{STATE TRANSLATOR}}
+	Programowanie \texttt{STATE TRANSLATOR} odbywa się w sposób bardzo zbliżony do \texttt{SYBMOL TRANSLATOR}. Wpierw należy przygotować moduł do programowania co dzieje się poprzez ustawienie kierunku sygnałem \texttt{DDIR} oraz puszczenie pulsu sygnału $\overline{\texttt{RESET}}$. \\
+	Zapis pojedynczej wartości funkcji przejścia z wynikiem w postaci stanu wymaga dokładnie tego samego procesu wybrania komórki pamięci w \texttt{STATE TRANSLATOR} co w \texttt{SYMBOL TRANSLATOR}. Z tego tytułu opis tego zadania nie został tu omówiony (jednak wciąż znajduje się on na wykresie czasowym). \\
+	Po wybraniu miejsca w pamięci modułu \texttt{STATE TRANSLATOR} następuje zapis stanu wartości funkcji przejścia: wybierany jest moduł sygnałami \texttt{CS\textsubscript{0,1}}, umieszczana jest wartość na magistrali \texttt{D\textsubscript{0...7}} oraz puszczony zostaje puls sygnału $\overline{\texttt{DT}}$ w celu zapisania danych w pamięci. Wykres czasowy znajduje się na stronie \pageref{fig:programstate}. na rysunku \ref{fig:programstate}.
+	\newline \newline
+	Po wykonaniu powyższych czynności, tj. zaprogramowaniu modułów \texttt{TAPE}, \texttt{SYMBOL TRANSLATOR} oraz \texttt{STATE TRANSLATOR} urządzenie jest gotowe do wykonania zapisanego programu.
+	
+	\paragraph{Wykresy czasowe}
+	Poniżej znajdują się wykresy czasowe uprzednio opisanych czynności. \\
+	\begin{figure}[H]
 		\begin{tikztimingtable}[
 			timing/slope=0.1,
 			timing/coldist=10pt,
@@ -203,18 +228,17 @@
 					\horlines[dotted]{}
 				\end{scope}
 				\foreach \n in {1,2,...,\twidth}
-					\draw (\n-0.5,-\nrows-.8)
-						node [below,inner sep=2pt] {\scalebox{.75}{\tiny\n}};
+				\draw (\n-0.5,-\nrows-.8)
+				node [below,inner sep=2pt] {\scalebox{.75}{\tiny\n}};
 			\end{pgfonlayer}
 		\end{tikztimingtable}
 		\caption{Wykres czasowy przygotowania maszyny do programowania.}
 		\label{fig:programprep}
 	\end{figure}
+	Na wykresie czasowym przygotowania maszyny do programowania kolumna 2 przedstawia przejście sygnału $\overline{\texttt{PROGRAM}}$ do stanu niskiego, kolumna 3 przedstawia puls sygnału $\overline{\texttt{RESET}}$. Późniejsze kolumny utrzymują stany sygnałów; zostały umieszczone w celach estetycznych wykresu, podobnie jak ten tekst, który służy częściowemu wypełnieniu pustego miejsca do końca tej strony.
+	\newpage
 	
-	\paragraph{Programowanie modułu \texttt{TAPE} (taśmy)}
-	Programowanie modułu \texttt{TAPE} zaczyna się przygotowaniem go do programowania, czyli wybraniem modułu, z użyciem sygnałów \texttt{CS\textsubscript{0,1}}, ustaleniem kierunku przepływu danych sygnałem \texttt{DDIR} - poziom wysoki dla zapisu - oraz puszczeniem pulsu sygnału $\overline{\texttt{RESET}}$. \\
-	Następnie zapis słowa wejściowego taśmy odbywa się w pętli: ustala się sybol do zapisu na magistrali \texttt{D\textsubscript{0...6}} (proszę zwrócić uwagę na indeks 0...6 - symbol ma 7 bitów), aktywuje się przesył danych (w tym przypadku zapis) do modułu pulsem sygnału  $\overline{\texttt{DT}}$ oraz wysła się dwa pulsy zegara \texttt{CLK} w celu przejścia do następnej komórki pamięci przechowującej zawartość taśmy.
-	\begin{figure}[!htb]
+	\begin{figure}[H]
 		\begin{tikztimingtable}[
 			timing/slope=0.1,
 			timing/coldist=10pt,
@@ -240,23 +264,17 @@
 					\horlines[dotted]{}
 				\end{scope}
 				\foreach \n in {1,2,...,\twidth}
-					\draw (\n-0.5,-\nrows-5.8)
-						node [below,inner sep=2pt] {\scalebox{.75}{\tiny\n}};
+				\draw (\n-0.5,-\nrows-5.8)
+				node [below,inner sep=2pt] {\scalebox{.75}{\tiny\n}};
 			\end{pgfonlayer}
 		\end{tikztimingtable}
 		\caption{Wykres czasowy programowania \texttt{TAPE}.}
 		\label{fig:programtape}
 	\end{figure}
+	Na wykresie czasowym programowania \texttt{TAPE} kolumny 1-2 reprezentują przygotowanie \texttt{TAPE} do programowania. 2-6 i 7-11 przedstawiają dwa pojedyncze zapisy symboli do dwóch kolejnych komórek pamięci w \texttt{TAPE}. Sygnały w kolumnach 13-17 zostały wykropkowane w celu wyeksponowania wielokrotnego powielenia operacji zapisu symbolu.
+	\newpage
 	
-	Na wykresie czasowym kolumny 1-2 reprezentują przygotowanie \texttt{TAPE} do programowania. 2-6 i 7-11 przedstawiają dwa pojedyncze zapisy symboli do dwóch kolejnych komórek pamięci w \texttt{TAPE}. Sygnały w kolumnach 13-17 zostały wykropkowane w celu wyeksponowania wielokrotnego powielenia operacji zapisu symbolu.
-	
-	\paragraph{Programowanie modułu \texttt{SYMBOL TRANSLATOR}}
-	Podobnie jak w przypadku programowania \texttt{TAPE}, \texttt{SYMBOL TRANSLATOR} również należy przygotować do programowania. W tym celu trzeba wybrać jedynie kierunek \texttt{DDIR} oraz puścić puls sygnału $\overline{\texttt{RESET}}$. \\
-	Zapis pojedynczej wartości funkcji przejścia z wynikiem w postaci symbolu oraz kierunku przesunięcia głowicy jest bardziej skomplikowany w porównaniu do zapisu pojedynczego symbolu taśmy. Główny problem leży w określeniu, która wartość funkcji ma zostać wgrana do modułu, czyli która komórka pamięci ma być zapisana. Aby to sprecyzować należy dokonać zapisu w dwóch rejestrach, które bezpośrednio określają wskazywane miejsce w pamięci: \texttt{TAPE SYMBOL REGISTER} oraz \texttt{STATE REGISTER}. Te dwa rejestry odpowiadają argumentom funkcji przejścia: stanowi oraz symbolowi. \\
-	%Każdy z tych rejestrów ma nadpisywaną swoją zawartość podczas kolejnych pulsów zegara \texttt{CLK}. \\
-	Zatem, żeby wskazać miejsce w pamięci modułu \texttt{SYMBOL TRANSLATOR} do którego należy zapisać wartość, trzeba wpierw wysłać symbol będący jednym z argumentów funkcji przejścia na magistralę \texttt{D\textsubscript{0...6}}, wybrać wewnętrzną magistralę \texttt{S\textsubscript{0...6}} sygnałami \texttt{CS\textsubscript{0,1}} oraz wysłać puls zegara w celu zapisania wartości magistrali w \texttt{TAPE SYMBOL REGISTER}. Następnie trzeba wysłać stan będący drugim z argumentów funkcji przejścia na magistralę \texttt{D\textsubscript{0...7}}, wybrać wewnętrzną magistralę \texttt{Q\textsubscript{0...7}} sygnałami \texttt{CS\textsubscript{0,1}} oraz wysłać puls zegara w celu zapisania wartości magistrali w \texttt{STATE REGISTER}. \\
-	Po tym miejsce w pamięci modułu \texttt{SYMBOL TRANSLATOR} jest wybrane i można przystąpić do zapisu symbolu oraz kierunku wartości funkcji przejścia. Osiąga się to za pomocą wyboru modułu sygnałami \texttt{CS\textsubscript{0,1}}, umieszczeniu danych do zapisu na magistrali \texttt{D\textsubscript{0...7}} oraz puszczeniem pulsu sygnału $\overline{\texttt{DT}}$.
-	\begin{figure}[!htb]
+	\begin{figure}[H]
 		\begin{tikztimingtable}[
 			timing/slope=0.1,
 			timing/coldist=10pt,
@@ -296,17 +314,10 @@
 			\texttt{SYT} -- \texttt{SYMBOL TRANSLATOR}.}
 		\label{fig:programsymbol}
 	\end{figure}
+	Na wykresie czasowym programowania \texttt{SYMBOL TRANSLATOR} kolumny 1-2 reprezentują przygotowanie do programowania; 3-11 przedstawiają programowanie pojedynczej wartości: 3-5 odpowiada za zapis do \texttt{TAPE SYMBOL REGISTER}, 6-8 za zapis do \texttt{STATE REGISTER}, 9-11 za zapis do \texttt{SYMBOL TRANSLATOR}. Kolumny 12-20 również przedstawiają programowanie wartości do \texttt{SYMBOL TRANSLATOR}, jednak zostały one wykropkowane w celu wyeksponowania wielokrotnego powtórzenia tej operacji.
+	\newpage
 	
-	Na wykresie czasowym kolumny 1-2 reprezentują przygotowanie do programowania; 3-11 przedstawiają programowanie pojedynczej wartości: 3-5 odpowiada za zapis do \texttt{TAPE SYMBOL REGISTER}, 6-8 za zapis do \texttt{STATE REGISTER}, 9-11 za zapis do \texttt{SYMBOL TRANSLATOR}. Kolumny 12-20 również przedstawiają programowanie wartości do \texttt{SYMBOL TRANSLATOR}, jednak zostały one wykropkowane w celu wyeksponowania wielokrotnego powtórzenia tej operacji.
-	\newline \newline
-	W przypadku programowania wartości funkcji dla argumentu ze stanem akceptującym po wykonaniu zapisu do \texttt{STATE REGISTER} należy puścić puls sygnału $\overline{\texttt{RESET}}$ w celu wyjścia maszyny ze stanu zatrzymania pracy (zatrzymania wpływu zegara na przejścia między staniami \texttt{STEP EXECUTION STATE REGISTER}). Jednak można zauważyć, że programowanie tych przejść nie ma sensu ze względu na zatrzymanie pracy urządzenia zaraz po przejściu do stanu akceptującego.
-	
-	\paragraph{Programowanie modułu \texttt{STATE TRANSLATOR}}
-	Programowanie \texttt{STATE TRANSLATOR} odbywa się w sposób bardzo zbliżony do \texttt{SYBMOL TRANSLATOR}. Wpierw należy przygotować moduł do programowania co dzieje się poprzez ustawienie kierunku sygnałem \texttt{DDIR} oraz puszczenie pulsu sygnału $\overline{\texttt{RESET}}$. \\
-	Zapis pojedynczej wartości funkcji przejścia z wynikiem w postaci stanu wymaga dokładnie tego samego procesu wybrania komórki pamięci w \texttt{STATE TRANSLATOR} co w \texttt{SYMBOL TRANSLATOR}. Z tego tytułu opis tego zadania nie został tu omówiony (jednak wciąż znajduje się on na wykresie czasowym). \\
-	Po wybraniu miejsca w pamięci modułu \texttt{STATE TRANSLATOR} następuje zapis stanu wartości funkcji przejścia: wybierany jest moduł sygnałami \texttt{CS\textsubscript{0,1}}, umieszczana jest wartość na magistrali \texttt{D\textsubscript{0...7}} oraz puszczony zostaje puls sygnału $\overline{\texttt{DT}}$ w celu zapisania danych w pamięci. \\
-	Podobnie jak na wykresie czasowym programowania \texttt{SYMBOL TRANSLATOR} kolumny 1-2 reprezentują przygotowanie do programowania; 3-11 przedstawiają programowanie pojedynczej wartości: 3-5 odpowiada za zapis do \texttt{TAPE SYMBOL REGISTER}, 6-8 za zapis do \texttt{STATE REGISTER}, 9-11 za zapis do \texttt{STATE TRANSLATOR}. Kolumny 12-20 również przedstawiają programowanie wartości do \texttt{STATE TRANSLATOR}, jednak zostały one wykropkowane w celu wyeksponowania wielokrotnego powtórzenia tej operacji.
-	\begin{figure}[h!]
+	\begin{figure}[H]
 		\begin{tikztimingtable}[
 			timing/slope=0.1,
 			timing/coldist=10pt,
@@ -339,20 +350,19 @@
 				node [below,inner sep=2pt] {\scalebox{.75}{\tiny\n}};
 			\end{pgfonlayer}
 		\end{tikztimingtable}
-		\caption{Wykres czasowy programowania \texttt{SYMBOL TRANSLATOR}. \\
+		\caption{Wykres czasowy programowania \texttt{STATE TRANSLATOR}. \\
 			Oznaczenia: \\
 			\texttt{TSR} -- \texttt{TAPE SYMBOL REGISTER}, \\
 			\texttt{SR} -- \texttt{STATE REGISTER}, \\
 			\texttt{STT} -- \texttt{STATE TRANSLATOR}.}
 		\label{fig:programstate}
 	\end{figure}
+	Na wykresie czasowym programowania \texttt{STATE TRANSLATOR} kolumny 1-2 reprezentują przygotowanie do programowania; 3-11 przedstawiają programowanie pojedynczej wartości: 3-5 odpowiada za zapis do \texttt{TAPE SYMBOL REGISTER}, 6-8 za zapis do \texttt{STATE REGISTER}, 9-11 za zapis do \texttt{STATE TRANSLATOR}. Kolumny 12-20 również przedstawiają programowanie wartości do \texttt{STATE TRANSLATOR}, jednak zostały one wykropkowane w celu wyeksponowania wielokrotnego powtórzenia tej operacji.
+	\newpage
 	
-	Po wykonaniu powyższych czynności, tj. zaprogramowaniu modułów \texttt{TAPE}, \texttt{SYMBOL TRANSLATOR} oraz \texttt{STATE TRANSLATOR} urządzenie jest gotowe do wykonania zapisanego programu.
-	
-	% TODO: Obsługa stanu akceptującego podczas programowania (stan akceptujący zacina maszynę)
 	\subsubsection{Wykonanie Programu}
 	Mając zaprogramowaną maszynę w celu uruchomienia i wykonania jej programu należy ją przygotować. Odbywa się to poprzez wysłanie pulsu sygnału $\overline{\texttt{RESET}}$ oraz przejście sygnału $\overline{\texttt{PROGRAM}}$ do stanu wysokiego.
-	\begin{figure}[!htb]
+	\begin{figure}[H]
 		\begin{tikztimingtable}[
 			timing/slope=0.1,
 			timing/coldist=10pt,
@@ -377,9 +387,9 @@
 		\caption{Wykres czasowy przygotowania maszyny do pracy.}
 		\label{fig:operateprep}
 	\end{figure}
-	\newline \newline
+	
 	Następnie całe działanie maszyny opiera się o sygnał zegara \texttt{CLK}. Każde dwa pulsy tego sygnału oznaczają wykonanie jednego ruchu urządzenia. Zegar powinien być dostarczony do momentu osiągnięcia przez maszynę stanu akceptującego zatrzymującego jej działanie.
-	\begin{figure}[!htb]
+	\begin{figure}[H]
 		\begin{tikztimingtable}[
 			timing/slope=0.1,
 			timing/coldist=10pt,
@@ -407,9 +417,12 @@
 	\subsubsection{Odczyt Wyniku Programu}
 	Po osiągnięciu przez maszynę stanu akceptującego zatrzymującego jej działanie program został wykonany. W celu odczytu wyniku pracy należy wpierw określić sposób jego zapisu. Jednym z naturalnych sposobów jest umieszczenie wyniku na początku taśmy i pozostawienie głowicy nad pierwszym symbolem taśmy. Ten podrozdział opisze jak odczytać wynik w przypadku zapisu rezultatu tym właśnie sposobem. Jeżeli użytkownik zapisuje wynik inną metodą, będzie musiał samodzielnie opracować sposób jego pobrania.
 	\newline \newline
-	Odczyt wyniku we wspomnianej postaci jest dość prostym zadaniem. Najpierw trzeba przygotować maszynę do odczytu. Aby tego dokonać należy umieścić maszynę w stan programowania, czyli ustawić sygnał $\overline{\texttt{PROGRAM}}$ na poziom niski, puścić puls sygnału $\overline{\texttt{RESET}}$, wybrać moduł \texttt{TAPE} sygnałami \texttt{CS\textsubscript{0,1}} oraz ustalić kierunek przepływu danych na odczyt sygnałem \texttt{DDIR} ustawiając go na niski poziom. Następnie w pętli odczytuje się symbole z taśmy: ustawia się $\overline{\texttt{DT}}$ na poziom niski, odczytuje dane z magistrali \texttt{D\textsubscript{0...6}}, przywraca się $\overline{\texttt{DT}}$ na poziom wysoki, po czym puszcza się dwa pulsy zegara \texttt{CLK}. \\
+	Odczyt wyniku we wspomnianej postaci jest dość prostym zadaniem. Najpierw trzeba przygotować maszynę do odczytu. Aby tego dokonać należy umieścić maszynę w stan programowania, czyli ustawić sygnał $\overline{\texttt{PROGRAM}}$ na poziom niski, puścić puls sygnału $\overline{\texttt{RESET}}$, wybrać moduł \texttt{TAPE} sygnałami \texttt{CS\textsubscript{0,1}} oraz ustalić kierunek przepływu danych na odczyt sygnałem \texttt{DDIR} ustawiając go na niski poziom. Następnie w pętli odczytuje się symbole z taśmy: ustawia się $\overline{\texttt{DT}}$ na poziom niski, odczytuje dane z magistrali \texttt{D\textsubscript{0...6}}, przywraca się $\overline{\texttt{DT}}$ na poziom wysoki, po czym puszcza się dwa pulsy zegara \texttt{CLK}.
+	\newline \newline
 	Na wykresie czasowym kolumny 1-3 pokazują sekwencję przygotowania maszyny do odczytu. Kolumny 4-8, 9-13 oraz 14-18 reprezentują cykl odczytów pojedynczych symboli z \texttt{TAPE}. Segment 14-18 został wykropkowany w celu wyeksponowania wielokrotnego powtórzenia tej operacji.
-	\begin{figure}[!htb]
+	\newline \newline
+	$S$ na wykresie oznacza moment w którym dane z \texttt{TAPE} na magistrali \texttt{D\textsubscript{0...6}} są poprawne (gotowe do odczytu).
+	\begin{figure}[H]
 		\begin{tikztimingtable}[
 			timing/slope=0.1,
 			timing/coldist=10pt,
@@ -443,9 +456,6 @@
 		\caption{Wykres czasowy odczytu wyniku z maszyny.}
 		\label{fig:read}
 	\end{figure}
-	
-	$S$ na wykresie oznacza moment w którym dane z \texttt{TAPE} na magistrali \texttt{D\textsubscript{0...6}} są poprawne (można je odczytać).
-	\newpage
 	\newpage
 	
 	\section{Fizyczny Opis Działania}
