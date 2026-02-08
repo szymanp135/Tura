@@ -405,7 +405,48 @@
 	\end{figure}
 	
 	\subsubsection{Odczyt Wyniku Programu}
-	Po osiągnięciu przez maszynę stanu akceptującego zatrzymującego jej działanie program został wykonany. W celu odczytu wyniku pracy należy wpierw określić sposób jego zapisu. Jednym z naturalnych sposobów jest umieszczenie wyniku na początku taśmy i pozostawienie głowicy nad pierwszym symbolem taśmy. Ten podrozdział opisze jak odczytać wynik w przypadku jego zapisu tym właśnie sposobem.
+	Po osiągnięciu przez maszynę stanu akceptującego zatrzymującego jej działanie program został wykonany. W celu odczytu wyniku pracy należy wpierw określić sposób jego zapisu. Jednym z naturalnych sposobów jest umieszczenie wyniku na początku taśmy i pozostawienie głowicy nad pierwszym symbolem taśmy. Ten podrozdział opisze jak odczytać wynik w przypadku zapisu rezultatu tym właśnie sposobem. Jeżeli użytkownik zapisuje wynik inną metodą, będzie musiał samodzielnie opracować sposób jego pobrania.
+	\newline \newline
+	Odczyt wyniku we wspomnianej postaci jest dość prostym zadaniem. Najpierw trzeba przygotować maszynę do odczytu. Aby tego dokonać należy umieścić maszynę w stan programowania, czyli ustawić sygnał $\overline{\texttt{PROGRAM}}$ na poziom niski, puścić puls sygnału $\overline{\texttt{RESET}}$, wybrać moduł \texttt{TAPE} sygnałami \texttt{CS\textsubscript{0,1}} oraz ustalić kierunek przepływu danych na odczyt sygnałem \texttt{DDIR} ustawiając go na niski poziom. Następnie w pętli odczytuje się symbole z taśmy: ustawia się $\overline{\texttt{DT}}$ na poziom niski, odczytuje dane z magistrali \texttt{D\textsubscript{0...6}}, przywraca się $\overline{\texttt{DT}}$ na poziom wysoki, po czym puszcza się dwa pulsy zegara \texttt{CLK}. \\
+	Na wykresie czasowym kolumny 1-3 pokazują sekwencję przygotowania maszyny do odczytu. Kolumny 4-8, 9-13 oraz 14-18 reprezentują cykl odczytów pojedynczych symboli z \texttt{TAPE}. Segment 14-18 został wykropkowany w celu wyeksponowania wielokrotnego powtórzenia tej operacji.
+	\begin{figure}[!htb]
+		\begin{tikztimingtable}[
+			timing/slope=0.1,
+			timing/coldist=10pt,
+			xscale=1.8,yscale=2,
+			thick
+			]
+			$\overline{\texttt{PROGRAM}}$	& HLL LLLLLLLLLL;[dotted]LLLLL;LL \\
+			$\overline{\texttt{RESET}}$		& HLH HHHHHHHHHH;[dotted]HHHHH;HH \\
+			\texttt{CS\textsubscript{1}}	& UUL LLLLLLLLLL;[dotted]LLLLL;LU \\
+			\texttt{CS\textsubscript{0}}	& UUL LLLLLLLLLL;[dotted]LLLLL;LU \\
+			\texttt{DDIR}					& UUL LLLLLLLLLL;[dotted]LLLLL;LU \\
+			$\overline{\texttt{DT}}$		& HHH LLHHH LLHHH;[dotted]LLHHH;HH \\
+			\texttt{D\textsubscript{0...6}}	& ZZZ ZD{$S$}ZZZ ZD{$S$}ZZZ;[dotted]ZD{$S$}ZZZ;ZZ \\
+			\texttt{CLK}					& HHH HHLHL HHLHL;[dotted]HHLHL;HH \\
+			\extracode
+			\begin{pgfonlayer}{background}
+				\begin{scope}[gray,semitransparent,semithick]
+					\vertlines{1,...,19}
+				\end{scope}
+				\begin{scope}[gray,semitransparent,semithick]
+					\horlines[dotted]{}
+				\end{scope}
+				\begin{scope}[darkgray,semitransparent,thick]
+					\vertlines{3,8,13,18}
+				\end{scope}
+				\foreach \n in {1,2,...,\twidth}
+				\draw (\n-0.5,-\nrows-6.8)
+				node [below,inner sep=2pt] {\scalebox{.75}{\tiny\n}};
+			\end{pgfonlayer}
+		\end{tikztimingtable}
+		\caption{Wykres czasowy odczytu wyniku z maszyny.}
+		\label{fig:read}
+	\end{figure}
+	
+	$S$ na wykresie oznacza moment w którym dane z \texttt{TAPE} na magistrali \texttt{D\textsubscript{0...6}} są poprawne (można je odczytać).
+	\newpage
+	\newpage
 	
 	\section{Fizyczny Opis Działania}
 	
