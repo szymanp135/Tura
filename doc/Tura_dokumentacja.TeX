@@ -4,6 +4,7 @@
 \usepackage[polish]{babel}
 \usepackage{tabularray}
 \usepackage{graphicx} % Required for inserting images
+\usepackage{svg}
 \usepackage{tikz-timing}
 
 \makeatletter
@@ -14,6 +15,8 @@
 	{\normalfont\normalsize\bfseries}}
 \setcounter{secnumdepth}{4}
 \makeatother
+
+\graphicspath{ {./images/} }
 
 \setlength{\parindent}{0pt}
 \usetikztiminglibrary[new={char=Q,reset char=R}]{counters}
@@ -58,7 +61,11 @@
 		\item Sekwencja ta jest powtarzana dopóty, dopóki maszyna nie osiągnie stanu akceptującego.
 	\end{enumerate}
 	
-	[obrazek]
+	\begin{figure}[h!]
+		\includegraphics[width=\linewidth]{mt.png}
+		\caption{Przykładowa wizualizacja maszyny Turinga}
+		\label{fig:examplemtmeaning}
+	\end{figure}
 	
 	Fizyczne urządzenie cechuje się dodatkowo ograniczoną długością taśmy oraz jednym stanem akceptującym zatrzymującym działanie maszyny. Formalnie ograniczoną długość taśmy można uzyskać poprzez wstawienie wartowników na jej początku oraz końcu, jednak te działanie pozostawione jest dla użytkownika maszyny do samodzielnej implementacji. Zaś stan akceptujący zatrzymujący działanie maszyny oznacza, że $F$ ma dokładnie jeden stan akceptujący $q_A$, po którego osiągnięciu urządzenie zatrzymuje pracę. 
 	
@@ -152,25 +159,33 @@
 			13-14 & \texttt{CS\textsubscript{0,1}} & In \\ \hline
 			15 & $\overline{\texttt{DT}}$ & In \\ \hline
 			16 & $\overline{\texttt{FINISH\_STATE}}$ & Out \\ \hline
+		\end{tblr}
+		\caption{Lista sygnałów interfejsu zewnętrznego}
+		\label{tab:extinterfacetable1}
+	\end{table}
+	\begin{table}[h!]
+		\centering
+		\begin{tblr}{||c|c|c||}
+			\hline
+			\textbf{Num. wyjścia} & \textbf{Sygnały} & \textbf{Kierunek} \\ \hline
 			17,19,21,23,25 & \texttt{Vcc} & --- \\ \hline
 			18,20,22,24,26 & \texttt{Vss} & --- \\ \hline
 			27-42 & \texttt{H\textsubscript{0...15}} & Out \\ \hline
 			43 & \texttt{SESR\_STATE} & Out \\ \hline
 			44 & \texttt{Vss} & --- \\ \hline
 		\end{tblr}
-		\caption{Lista sygnałów interfejsu zewnętrznego}
-		\label{tab:extinterfacetable}
+		\caption{Lista sygnałów interfejsu zewnętrznego (cd.)}
+		\label{tab:extinterfacetable2}
 	\end{table}
 	\newpage
 	
 	\subsubsection{Programowanie}
-	Mając na uwadze czytelność dokumentacji zdecydowano o opisie stanu sygnałów w czasie w formie wykresu czasowego. Każdy rząd odpowiada konkretnemu sygnałowi; linia w rzędzie zmieniająca się między stanem wysokim a niskim oznacza stan sygnału w czasie. Każda kolumna wykresu przedstawia konkretny odcinek czasowy wraz ze stanami sygnałów w tym czasie. Odcinki nie mają ustalonego konkretnego czasu trwania, ani nie muszą trwać tyle samo, a mają bardziej na zasadzie pokazać kolejność wysłania sygnałów. Sygnały zmieniane są podczas przejść między odcinkami czasowymi. 
-	\newline \newline
+	%Mając na uwadze czytelność dokumentacji zdecydowano o opisie stanu sygnałów w czasie w formie wykresu czasowego. Każdy rząd odpowiada konkretnemu sygnałowi; linia w rzędzie zmieniająca się między stanem wysokim a niskim oznacza stan sygnału w czasie. Każda kolumna wykresu przedstawia konkretny odcinek czasowy wraz ze stanami sygnałów w tym czasie. Odcinki nie mają ustalonego konkretnego czasu trwania, ani nie muszą trwać tyle samo, a mają bardziej na zasadzie pokazać kolejność wysłania sygnałów. Sygnały zmieniane są podczas przejść między odcinkami czasowymi. \newline \newline
 	Programowanie maszyny odbywa się za pomocą interfejsu zewnętrznego. Dzięki odpowiedniemu wykorzystaniu udostępnionych sygnałów użytkownik jest w stanie manipulować zawartością bloków pamięci \texttt{TAPE}, \texttt{SYMBOL TRANSLATOR} oraz \texttt{STATE TRANSLATOR}.
-	\newline \newline
+	%\newline \newline
 	\paragraph{Przygotowanie maszyny do programowania}
 	W celu rozpoczęcia programowania maszyny należy wpierw ją do tego przygotować. Zadanie to jest dość proste - wystarczy ustawić sygnał $\overline{\texttt{PROGRAM}}$ na niski poziom, po czym puścić puls sygnału $\overline{\texttt{RESET}}$.
-	\begin{figure}[h!]
+	\begin{figure}[!htb]
 		\begin{tikztimingtable}[
 			timing/slope=0.1,
 			timing/coldist=10pt,
@@ -192,24 +207,24 @@
 						node [below,inner sep=2pt] {\scalebox{.75}{\tiny\n}};
 			\end{pgfonlayer}
 		\end{tikztimingtable}
-		\caption{Schemat czasowy przygotowania maszyny do programowania}
-		\label{fig:programprimer}
+		\caption{Wykres czasowy przygotowania maszyny do programowania.}
+		\label{fig:programprep}
 	\end{figure}
 	
 	\paragraph{Programowanie modułu \texttt{TAPE} (taśmy)}
-	Programowanie modułu \texttt{TAPE} zaczyna się przygotowaniem go do programowania, czyli wybraniem modułu, z użyciem sygnałów \texttt{CS\textsubscript{0,1}}, oraz wybraniem kierunku przepływu danych sygnałem \texttt{DDIR} - poziom wysoki dla zapisu. \\
-	Następnie zapis słowa wejściowego taśmy odbywa się w pętli: ustala się sybol do zapisu na magistrali \texttt{D\textsubscript{0...6}} (proszę zwrócić uwagę na indeks 0...6 - symbol ma 7 bitów), aktywuje się przesył danych (w tym przypadku zapis) do modułu pulsem sygnału  $\overline{\texttt{DT}}$ oraz wysła się dwa pulsy zegara \texttt{CLK} w celu przejścia do następnej komórki pamięci przechowującej zawartość taśmy. \\
-	Na wykresie czasowym kolumny 1-2 reprezentują przygotowanie \texttt{TAPE} do programowania. 2-6 i 7-11 przedstawiają dwa pojedyncze zapisy symboli do dwóch kolejnych komórek pamięci w \texttt{TAPE}. Sygnały w kolumnach 13-17 zostały wykropkowane w celu wyeksponowania wielokrotnego powielenia operacji zapisu symbolu.
-	\begin{figure}[h!]
+	Programowanie modułu \texttt{TAPE} zaczyna się przygotowaniem go do programowania, czyli wybraniem modułu, z użyciem sygnałów \texttt{CS\textsubscript{0,1}}, ustaleniem kierunku przepływu danych sygnałem \texttt{DDIR} - poziom wysoki dla zapisu - oraz puszczeniem pulsu sygnału $\overline{\texttt{RESET}}$. \\
+	Następnie zapis słowa wejściowego taśmy odbywa się w pętli: ustala się sybol do zapisu na magistrali \texttt{D\textsubscript{0...6}} (proszę zwrócić uwagę na indeks 0...6 - symbol ma 7 bitów), aktywuje się przesył danych (w tym przypadku zapis) do modułu pulsem sygnału  $\overline{\texttt{DT}}$ oraz wysła się dwa pulsy zegara \texttt{CLK} w celu przejścia do następnej komórki pamięci przechowującej zawartość taśmy.
+	\begin{figure}[!htb]
 		\begin{tikztimingtable}[
 			timing/slope=0.1,
 			timing/coldist=10pt,
 			xscale=2,yscale=2,
 			thick
 			]
-			\texttt{CS\textsubscript{1}}	& ULLLLLLLLLLLLLLLLU \\
-			\texttt{CS\textsubscript{0}}	& ULLLLLLLLLLLLLLLLU \\
-			\texttt{DDIR}					& UHHHHHHHHHHHHHHHHU \\
+			$\overline{\texttt{RESET}}$		& HLHHHHHHHHHHH;[dotted]HHH;HH \\
+			\texttt{CS\textsubscript{1}}	& ULLLLLLLLLLLL;[dotted]LLL;LU \\
+			\texttt{CS\textsubscript{0}}	& ULLLLLLLLLLLL;[dotted]LLL;LU \\
+			\texttt{DDIR}					& UHHHHHHHHHHHH;[dotted]HHH;HU \\
 			\texttt{D\textsubscript{0...6}}	& UU DDDDD{}DDDDD{};[dotted]DDDDD{}; U \\
 			$\overline{\texttt{DT}}$		& HH HLHHH  HLHHH  ;[dotted]HLHHH; H \\
 			\texttt{CLK}					& HH HHLHL  HHLHL  ;[dotted]HHLHL; H \\
@@ -225,28 +240,30 @@
 					\horlines[dotted]{}
 				\end{scope}
 				\foreach \n in {1,2,...,\twidth}
-					\draw (\n-0.5,-\nrows-4.8)
+					\draw (\n-0.5,-\nrows-5.8)
 						node [below,inner sep=2pt] {\scalebox{.75}{\tiny\n}};
 			\end{pgfonlayer}
 		\end{tikztimingtable}
-		\caption{Schemat czasowy programowania \texttt{TAPE}}
+		\caption{Wykres czasowy programowania \texttt{TAPE}.}
 		\label{fig:programtape}
 	\end{figure}
 	
+	Na wykresie czasowym kolumny 1-2 reprezentują przygotowanie \texttt{TAPE} do programowania. 2-6 i 7-11 przedstawiają dwa pojedyncze zapisy symboli do dwóch kolejnych komórek pamięci w \texttt{TAPE}. Sygnały w kolumnach 13-17 zostały wykropkowane w celu wyeksponowania wielokrotnego powielenia operacji zapisu symbolu.
+	
 	\paragraph{Programowanie modułu \texttt{SYMBOL TRANSLATOR}}
-	Podobnie jak w przypadku programowania \texttt{TAPE}, \texttt{SYMBOL TRANSLATOR} również należy przygotować do programowania. W tym celu trzeba wybrać jedynie kierunek \texttt{DDIR}. \\
+	Podobnie jak w przypadku programowania \texttt{TAPE}, \texttt{SYMBOL TRANSLATOR} również należy przygotować do programowania. W tym celu trzeba wybrać jedynie kierunek \texttt{DDIR} oraz puścić puls sygnału $\overline{\texttt{RESET}}$. \\
 	Zapis pojedynczej wartości funkcji przejścia z wynikiem w postaci symbolu oraz kierunku przesunięcia głowicy jest bardziej skomplikowany w porównaniu do zapisu pojedynczego symbolu taśmy. Główny problem leży w określeniu, która wartość funkcji ma zostać wgrana do modułu, czyli która komórka pamięci ma być zapisana. Aby to sprecyzować należy dokonać zapisu w dwóch rejestrach, które bezpośrednio określają wskazywane miejsce w pamięci: \texttt{TAPE SYMBOL REGISTER} oraz \texttt{STATE REGISTER}. Te dwa rejestry odpowiadają argumentom funkcji przejścia: stanowi oraz symbolowi. \\
 	%Każdy z tych rejestrów ma nadpisywaną swoją zawartość podczas kolejnych pulsów zegara \texttt{CLK}. \\
 	Zatem, żeby wskazać miejsce w pamięci modułu \texttt{SYMBOL TRANSLATOR} do którego należy zapisać wartość, trzeba wpierw wysłać symbol będący jednym z argumentów funkcji przejścia na magistralę \texttt{D\textsubscript{0...6}}, wybrać wewnętrzną magistralę \texttt{S\textsubscript{0...6}} sygnałami \texttt{CS\textsubscript{0,1}} oraz wysłać puls zegara w celu zapisania wartości magistrali w \texttt{TAPE SYMBOL REGISTER}. Następnie trzeba wysłać stan będący drugim z argumentów funkcji przejścia na magistralę \texttt{D\textsubscript{0...7}}, wybrać wewnętrzną magistralę \texttt{Q\textsubscript{0...7}} sygnałami \texttt{CS\textsubscript{0,1}} oraz wysłać puls zegara w celu zapisania wartości magistrali w \texttt{STATE REGISTER}. \\
-	Po tym miejsce w pamięci modułu \texttt{SYMBOL TRANSLATOR} jest wybrane i można przystąpić do zapisu symbolu oraz kierunku wartości funkcji przejścia. Osiąga się to za pomocą wyboru modułu sygnałami \texttt{CS\textsubscript{0,1}}, umieszczeniu danych do zapisu na magistrali \texttt{D\textsubscript{0...7}} oraz puszczeniem pulsu sygnału $\overline{\texttt{DT}}$. \\
-	Na wykresie czasowym kolumny 1-2 reprezentują przygotowanie do programowania; 3-11 przedstawiają programowanie pojedynczej wartości: 3-5 odpowiada za zapis do \texttt{TAPE SYMBOL REGISTER}, 6-8 za zapis do \texttt{STATE REGISTER}, 9-11 za zapis do \texttt{SYMBOL TRANSLATOR}. Kolumny 12-20 również przedstawiają programowanie wartości do \texttt{SYMBOL TRANSLATOR}, jednak zostały one wykropkowane w celu wyeksponowania wielokrotnego powtórzenia tej operacji.
-	\begin{figure}[h!]
+	Po tym miejsce w pamięci modułu \texttt{SYMBOL TRANSLATOR} jest wybrane i można przystąpić do zapisu symbolu oraz kierunku wartości funkcji przejścia. Osiąga się to za pomocą wyboru modułu sygnałami \texttt{CS\textsubscript{0,1}}, umieszczeniu danych do zapisu na magistrali \texttt{D\textsubscript{0...7}} oraz puszczeniem pulsu sygnału $\overline{\texttt{DT}}$.
+	\begin{figure}[!htb]
 		\begin{tikztimingtable}[
 			timing/slope=0.1,
 			timing/coldist=10pt,
 			xscale=1.714,yscale=2,
 			thick
 			]
+			$\overline{\texttt{RESET}}$		& HLHHHHHHHHHH;[dotted]HHHHHHH;HH \\
 			\texttt{CS\textsubscript{1}}	& UU LLL HHH LLL;[dotted] LLL HHH LLL; U \\
 			\texttt{CS\textsubscript{0}}	& UU HHH LLL HHH;[dotted] HHH LLL HHH; U \\
 			\texttt{DDIR}					& UHHHHHHHHHHH;[dotted]HHHHHHH;HU \\
@@ -268,20 +285,24 @@
 					\horlines[dotted]{}
 				\end{scope}
 				\foreach \n in {1,2,...,\twidth}
-				\draw (\n-0.5,-\nrows-4.8)
+				\draw (\n-0.5,-\nrows-5.8)
 				node [below,inner sep=2pt] {\scalebox{.75}{\tiny\n}};
 			\end{pgfonlayer}
 		\end{tikztimingtable}
-		\caption{Schemat czasowy programowania \texttt{SYMBOL TRANSLATOR} \\
+		\caption{Wykres czasowy programowania \texttt{SYMBOL TRANSLATOR}. \\
 			Oznaczenia: \\
-			\texttt{TSR} -- \texttt{TAPE SYMBOL REGISTER} \\
-			\texttt{SR} -- \texttt{STATE REGISTER} \\
-			\texttt{SYT} -- \texttt{SYMBOL TRANSLATOR}}
+			\texttt{TSR} -- \texttt{TAPE SYMBOL REGISTER}, \\
+			\texttt{SR} -- \texttt{STATE REGISTER}, \\
+			\texttt{SYT} -- \texttt{SYMBOL TRANSLATOR}.}
 		\label{fig:programsymbol}
 	\end{figure}
 	
+	Na wykresie czasowym kolumny 1-2 reprezentują przygotowanie do programowania; 3-11 przedstawiają programowanie pojedynczej wartości: 3-5 odpowiada za zapis do \texttt{TAPE SYMBOL REGISTER}, 6-8 za zapis do \texttt{STATE REGISTER}, 9-11 za zapis do \texttt{SYMBOL TRANSLATOR}. Kolumny 12-20 również przedstawiają programowanie wartości do \texttt{SYMBOL TRANSLATOR}, jednak zostały one wykropkowane w celu wyeksponowania wielokrotnego powtórzenia tej operacji.
+	\newline \newline
+	W przypadku programowania wartości funkcji dla argumentu ze stanem akceptującym po wykonaniu zapisu do \texttt{STATE REGISTER} należy puścić puls sygnału $\overline{\texttt{RESET}}$ w celu wyjścia maszyny ze stanu zatrzymania pracy (zatrzymania wpływu zegara na przejścia między staniami \texttt{STEP EXECUTION STATE REGISTER}). Jednak można zauważyć, że programowanie tych przejść nie ma sensu ze względu na zatrzymanie pracy urządzenia zaraz po przejściu do stanu akceptującego.
+	
 	\paragraph{Programowanie modułu \texttt{STATE TRANSLATOR}}
-	Programowanie \texttt{STATE TRANSLATOR} odbywa się w sposób bardzo zbliżony do \texttt{SYBMOL TRANSLATOR}. Wpierw należy przygotować moduł do programowania co dzieje się poprzez ustawienie kierunku sygnałem \texttt{DDIR}. \\
+	Programowanie \texttt{STATE TRANSLATOR} odbywa się w sposób bardzo zbliżony do \texttt{SYBMOL TRANSLATOR}. Wpierw należy przygotować moduł do programowania co dzieje się poprzez ustawienie kierunku sygnałem \texttt{DDIR} oraz puszczenie pulsu sygnału $\overline{\texttt{RESET}}$. \\
 	Zapis pojedynczej wartości funkcji przejścia z wynikiem w postaci stanu wymaga dokładnie tego samego procesu wybrania komórki pamięci w \texttt{STATE TRANSLATOR} co w \texttt{SYMBOL TRANSLATOR}. Z tego tytułu opis tego zadania nie został tu omówiony (jednak wciąż znajduje się on na wykresie czasowym). \\
 	Po wybraniu miejsca w pamięci modułu \texttt{STATE TRANSLATOR} następuje zapis stanu wartości funkcji przejścia: wybierany jest moduł sygnałami \texttt{CS\textsubscript{0,1}}, umieszczana jest wartość na magistrali \texttt{D\textsubscript{0...7}} oraz puszczony zostaje puls sygnału $\overline{\texttt{DT}}$ w celu zapisania danych w pamięci. \\
 	Podobnie jak na wykresie czasowym programowania \texttt{SYMBOL TRANSLATOR} kolumny 1-2 reprezentują przygotowanie do programowania; 3-11 przedstawiają programowanie pojedynczej wartości: 3-5 odpowiada za zapis do \texttt{TAPE SYMBOL REGISTER}, 6-8 za zapis do \texttt{STATE REGISTER}, 9-11 za zapis do \texttt{STATE TRANSLATOR}. Kolumny 12-20 również przedstawiają programowanie wartości do \texttt{STATE TRANSLATOR}, jednak zostały one wykropkowane w celu wyeksponowania wielokrotnego powtórzenia tej operacji.
@@ -292,6 +313,7 @@
 			xscale=1.714,yscale=2,
 			thick
 			]
+			$\overline{\texttt{RESET}}$		& HLHHHHHHHHHH;[dotted]HHHHHHH;HH \\
 			\texttt{CS\textsubscript{1}}	& UU LLL HHH HHH;[dotted] LLL HHH HHH; U \\
 			\texttt{CS\textsubscript{0}}	& UU HHH LLL LLL;[dotted] HHH LLL LLL; U \\
 			\texttt{DDIR}					& UHHHHHHHHHHH;[dotted]HHHHHHH;HU \\
@@ -313,22 +335,77 @@
 					\horlines[dotted]{}
 				\end{scope}
 				\foreach \n in {1,2,...,\twidth}
-				\draw (\n-0.5,-\nrows-4.8)
+				\draw (\n-0.5,-\nrows-5.8)
 				node [below,inner sep=2pt] {\scalebox{.75}{\tiny\n}};
 			\end{pgfonlayer}
 		\end{tikztimingtable}
-		\caption{Schemat czasowy programowania \texttt{SYMBOL TRANSLATOR} \\
+		\caption{Wykres czasowy programowania \texttt{SYMBOL TRANSLATOR}. \\
 			Oznaczenia: \\
-			\texttt{TSR} -- \texttt{TAPE SYMBOL REGISTER} \\
-			\texttt{SR} -- \texttt{STATE REGISTER} \\
-			\texttt{STT} -- \texttt{STATE TRANSLATOR}}
+			\texttt{TSR} -- \texttt{TAPE SYMBOL REGISTER}, \\
+			\texttt{SR} -- \texttt{STATE REGISTER}, \\
+			\texttt{STT} -- \texttt{STATE TRANSLATOR}.}
 		\label{fig:programstate}
 	\end{figure}
 	
-	Po wykonaniu powyższych czynności, tj przygotowaniu do programowania oraz zaprogramowaniu modułów \texttt{TAPE}, \texttt{SYMBOL TRANSLATOR} \texttt{STATE TRANSLATOR} urządzenie jest gotowe do wykonania programu.
+	Po wykonaniu powyższych czynności, tj. zaprogramowaniu modułów \texttt{TAPE}, \texttt{SYMBOL TRANSLATOR} oraz \texttt{STATE TRANSLATOR} urządzenie jest gotowe do wykonania zapisanego programu.
 	
 	% TODO: Obsługa stanu akceptującego podczas programowania (stan akceptujący zacina maszynę)
 	\subsubsection{Wykonanie Programu}
+	Mając zaprogramowaną maszynę w celu uruchomienia i wykonania jej programu należy ją przygotować. Odbywa się to poprzez wysłanie pulsu sygnału $\overline{\texttt{RESET}}$ oraz przejście sygnału $\overline{\texttt{PROGRAM}}$ do stanu wysokiego.
+	\begin{figure}[!htb]
+		\begin{tikztimingtable}[
+			timing/slope=0.1,
+			timing/coldist=10pt,
+			xscale=2,yscale=2,
+			thick
+			]
+			$\overline{\texttt{PROGRAM}}$	& LLLHHHHHHHHHHHHHHH \\
+			$\overline{\texttt{RESET}}$		& HLHHHHHHHHHHHHHHHH \\		
+			\extracode
+			\begin{pgfonlayer}{background}
+				\begin{scope}[gray,semitransparent,semithick]
+					\vertlines{1,...,17}
+				\end{scope}
+				\begin{scope}[gray,semitransparent,semithick]
+					\horlines[dotted]{}
+				\end{scope}
+				\foreach \n in {1,2,...,\twidth}
+				\draw (\n-0.5,-\nrows-.8)
+				node [below,inner sep=2pt] {\scalebox{.75}{\tiny\n}};
+			\end{pgfonlayer}
+		\end{tikztimingtable}
+		\caption{Wykres czasowy przygotowania maszyny do pracy.}
+		\label{fig:operateprep}
+	\end{figure}
+	\newline \newline
+	Następnie całe działanie maszyny opiera się o sygnał zegara \texttt{CLK}. Każde dwa pulsy tego sygnału oznaczają wykonanie jednego ruchu urządzenia. Zegar powinien być dostarczony do momentu osiągnięcia przez maszynę stanu akceptującego zatrzymującego jej działanie.
+	\begin{figure}[!htb]
+		\begin{tikztimingtable}[
+			timing/slope=0.1,
+			timing/coldist=10pt,
+			xscale=2,yscale=2,
+			thick
+			]
+			\texttt{CLK}					& LHLHLHLHLHLHLHLHLH \\
+			\extracode
+			\begin{pgfonlayer}{background}
+				\begin{scope}[gray,semitransparent,semithick]
+					\vertlines{1,...,17}
+				\end{scope}
+				\begin{scope}[gray,semitransparent,semithick]
+					\horlines[dotted]{1}
+				\end{scope}
+				\foreach \n in {1,2,...,\twidth}
+				\draw (\n-0.5,-\nrows+.2)
+				node [below,inner sep=2pt] {\scalebox{.75}{\tiny\n}};
+			\end{pgfonlayer}
+		\end{tikztimingtable}
+		\caption{Wykres czasowy przykładowago działania zegara.}
+		\label{fig:operateclk}
+	\end{figure}
+	
+	\subsubsection{Odczyt Wyniku Programu}
+	Po osiągnięciu przez maszynę stanu akceptującego zatrzymującego jej działanie program został wykonany. W celu odczytu wyniku pracy należy wpierw określić sposób jego zapisu. Jednym z naturalnych sposobów jest umieszczenie wyniku na początku taśmy i pozostawienie głowicy nad pierwszym symbolem taśmy. Ten podrozdział opisze jak odczytać wynik w przypadku jego zapisu tym właśnie sposobem.
 	
 	\section{Fizyczny Opis Działania}
 	
