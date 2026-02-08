@@ -142,7 +142,7 @@
 	\end{description}
 	
 	\subsubsection{Interfejs zewnętrzny}
-	W celu zasilenia urządzenia oraz komunikacji zastosowany został zewnętrzny interfejs w formie złącza krawędziowego. Składaja się on z 16 wyjść sterujących, 17 informujacych o stanie maszyny oraz 11 zasilających. W sumie daje to 44 wyjścia. Wszystkie wspomniane sygnały (po za \texttt{Vcc} oraz \texttt{Vss}) zostały wyjaśnione w poprzednim podrozdziale. Wyjścia \texttt{Vcc} oraz \texttt{Vss} są wyjściami odpowiednio zasilania i uziemienia. \texttt{Vcc} powinno mieć napięcie +5V względem \texttt{Vss}. \\
+	W celu zasilenia urządzenia oraz komunikacji zastosowany został zewnętrzny interfejs w formie złącza krawędziowego. Składa się on z 17 wyjść sterujących oraz informujacych o stanie maszyny, 11 zasilających oraz 16 niepodpiętych do żadnych sygnałów. W sumie daje to 44 wyjścia. Wszystkie wspomniane sygnały (po za \texttt{Vcc} oraz \texttt{Vss}) zostały wyjaśnione w poprzednim podrozdziale. Wyjścia \texttt{Vcc} oraz \texttt{Vss} są wyjściami odpowiednio zasilania i uziemienia. \texttt{Vcc} powinno mieć napięcie +5V względem \texttt{Vss}. \\
 	By uniknąć zbyt podobnych oznaczeń, kierunki sygnałów zamiast ,,Wej/Wyj'' zostały oznaczone angielskimi ,,In/Out''.
 	\newline \newline
 	\textbf{Tabela sygnałów interfejsu:}
@@ -160,6 +160,7 @@
 			13-14 & \texttt{CS\textsubscript{0,1}} & In \\ \hline
 			15 & $\overline{\texttt{DT}}$ & In \\ \hline
 			16 & $\overline{\texttt{FINISH\_STATE}}$ & Out \\ \hline
+			17 & \texttt{SESR\_STATE} & Out \\ \hline
 		\end{tblr}
 		\caption{Lista sygnałów interfejsu zewnętrznego}
 		\label{tab:extinterfacetable1}
@@ -169,17 +170,15 @@
 		\begin{tblr}{||c|c|c||}
 			\hline
 			\textbf{Num. wyjścia} & \textbf{Sygnały} & \textbf{Kierunek} \\ \hline
-			17,19,21,23,25 & \texttt{Vcc} & --- \\ \hline
-			18,20,22,24,26 & \texttt{Vss} & --- \\ \hline
-			27-42 & \texttt{H\textsubscript{0...15}} & Out \\ \hline
-			43 & \texttt{SESR\_STATE} & Out \\ \hline
-			44 & \texttt{Vss} & --- \\ \hline
+			19,21,23,25,27 & \texttt{Vcc} & --- \\ \hline
+			18,20,22,24,26,28 & \texttt{Vss} & --- \\ \hline
+			29-44 & --- & --- \\ \hline
 		\end{tblr}
 		\caption{Lista sygnałów interfejsu zewnętrznego (cd.)}
 		\label{tab:extinterfacetable2}
 	\end{table}
 	
-	Oprócz interfejsu zewnętrznego na urządzeniu znajdują się dwa dodatkowe złącza: J2 i J3. Służą one do odczytu wartości odpowiednio \texttt{TAPE SYMBOL REGISTER} oraz \texttt{STATE REGISTER} (złącza te są podłączone do tych modułów bezpośrednio).
+	Oprócz interfejsu zewnętrznego na urządzeniu znajdują się trzy dodatkowe złącza: J2, J3 i J4. Służą one do odczytu wartości odpowiednio \texttt{TAPE SYMBOL REGISTER}, \texttt{STATE REGISTER} oraz \texttt{HEAD POSITION} (złącza te są podłączone do tych modułów bezpośrednio).
 	
 	\subsubsection{Programowanie}
 	%Mając na uwadze czytelność dokumentacji zdecydowano o opisie stanu sygnałów w czasie w formie wykresu czasowego. Każdy rząd odpowiada konkretnemu sygnałowi; linia w rzędzie zmieniająca się między stanem wysokim a niskim oznacza stan sygnału w czasie. Każda kolumna wykresu przedstawia konkretny odcinek czasowy wraz ze stanami sygnałów w tym czasie. Odcinki nie mają ustalonego konkretnego czasu trwania, ani nie muszą trwać tyle samo, a mają bardziej na zasadzie pokazać kolejność wysłania sygnałów. Sygnały zmieniane są podczas przejść między odcinkami czasowymi. \newline \newline
