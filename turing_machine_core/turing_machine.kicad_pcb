@@ -4924,7 +4924,7 @@
 			(layers "F.Cu" "F.Mask")
 			(net 128 "unconnected-(J1-Pin_29-Pad29)")
 			(pinfunction "Pin_29")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "5fd0b936-2cd0-4751-945f-97d8c0f1d330")
 		)
 		(pad "30" connect rect
@@ -4933,7 +4933,7 @@
 			(layers "B.Cu" "B.Mask")
 			(net 134 "unconnected-(J1-Pin_30-Pad30)")
 			(pinfunction "Pin_30")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "cb281f32-b0e5-4608-a3b0-ed9fd7ea8adc")
 		)
 		(pad "31" connect rect
@@ -4942,7 +4942,7 @@
 			(layers "F.Cu" "F.Mask")
 			(net 123 "unconnected-(J1-Pin_31-Pad31)")
 			(pinfunction "Pin_31")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "2ce2fa94-c77f-4259-ad62-75e92cfd25fd")
 		)
 		(pad "32" connect rect
@@ -4951,7 +4951,7 @@
 			(layers "B.Cu" "B.Mask")
 			(net 124 "unconnected-(J1-Pin_32-Pad32)")
 			(pinfunction "Pin_32")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "3797bf1f-4bf1-4d87-b6c0-b39a7927cb3c")
 		)
 		(pad "33" connect rect
@@ -4960,7 +4960,7 @@
 			(layers "F.Cu" "F.Mask")
 			(net 130 "unconnected-(J1-Pin_33-Pad33)")
 			(pinfunction "Pin_33")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "655f2416-d391-4397-bb6c-ca1d37d470c2")
 		)
 		(pad "34" connect rect
@@ -4969,7 +4969,7 @@
 			(layers "B.Cu" "B.Mask")
 			(net 127 "unconnected-(J1-Pin_34-Pad34)")
 			(pinfunction "Pin_34")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "47ee2ec8-fadf-425f-8d09-0e17df2720c9")
 		)
 		(pad "35" connect rect
@@ -4978,7 +4978,7 @@
 			(layers "F.Cu" "F.Mask")
 			(net 129 "unconnected-(J1-Pin_35-Pad35)")
 			(pinfunction "Pin_35")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "62b8dd1b-5f3c-435d-91e5-b5d08b92e53a")
 		)
 		(pad "36" connect rect
@@ -4987,7 +4987,7 @@
 			(layers "B.Cu" "B.Mask")
 			(net 137 "unconnected-(J1-Pin_36-Pad36)")
 			(pinfunction "Pin_36")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "f9b5b2aa-c529-4673-9452-31d38c2b80b3")
 		)
 		(pad "37" connect rect
@@ -4996,7 +4996,7 @@
 			(layers "F.Cu" "F.Mask")
 			(net 135 "unconnected-(J1-Pin_37-Pad37)")
 			(pinfunction "Pin_37")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "ec59281b-93fc-42bc-8969-90037858cd85")
 		)
 		(pad "38" connect rect
@@ -5005,7 +5005,7 @@
 			(layers "B.Cu" "B.Mask")
 			(net 122 "unconnected-(J1-Pin_38-Pad38)")
 			(pinfunction "Pin_38")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "1628fbe9-2e2e-4e2d-93f0-4557882ec5c4")
 		)
 		(pad "39" connect rect
@@ -5014,7 +5014,7 @@
 			(layers "F.Cu" "F.Mask")
 			(net 131 "unconnected-(J1-Pin_39-Pad39)")
 			(pinfunction "Pin_39")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "995623f9-6f04-4d60-82e7-c9283870814e")
 		)
 		(pad "40" connect rect
@@ -5023,7 +5023,7 @@
 			(layers "B.Cu" "B.Mask")
 			(net 136 "unconnected-(J1-Pin_40-Pad40)")
 			(pinfunction "Pin_40")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "f259e7f3-73ab-472c-8104-9da32ff1ed1e")
 		)
 		(pad "41" connect rect
@@ -5032,7 +5032,7 @@
 			(layers "F.Cu" "F.Mask")
 			(net 132 "unconnected-(J1-Pin_41-Pad41)")
 			(pinfunction "Pin_41")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "acdc9e93-ca1e-41f3-a1ee-88fd0347d277")
 		)
 		(pad "42" connect rect
@@ -5041,7 +5041,7 @@
 			(layers "B.Cu" "B.Mask")
 			(net 126 "unconnected-(J1-Pin_42-Pad42)")
 			(pinfunction "Pin_42")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "3c39e75d-6a45-408c-9bce-98bd2ad7178b")
 		)
 		(pad "43" connect rect
@@ -5050,7 +5050,7 @@
 			(layers "F.Cu" "F.Mask")
 			(net 125 "unconnected-(J1-Pin_43-Pad43)")
 			(pinfunction "Pin_43")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "3b2c37f4-43fd-4ea4-b4c2-d2248d3619b6")
 		)
 		(pad "44" connect rect
@@ -5059,7 +5059,7 @@
 			(layers "B.Cu" "B.Mask")
 			(net 133 "unconnected-(J1-Pin_44-Pad44)")
 			(pinfunction "Pin_44")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "c45edf4a-c0a6-4caf-8bcc-e20f71489e13")
 		)
 		(embedded_fonts no)

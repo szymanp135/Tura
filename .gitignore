@@ -4,8 +4,13 @@ turing_machine_core/turing_machine-backups
 turing_machine_core/gerber
 turing_machine_core/~*
 turing_machine_core/#*
+turing_machine_driver/fp-info-cache
+turing_machine_driver/plots
+turing_machine_driver/turing_driver-backups
+turing_machine_driver/gerber
+turing_machine_driver/~*
+turing_machine_driver/#*
 doc/Tura_dokumentacja.aux
 doc/Tura_dokumentacja.log
 doc/Tura_dokumentacja.synctex.gz
 doc/Tura_dokumentacja.toc
-turing_machine_driver/
