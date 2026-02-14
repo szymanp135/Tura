@@ -10,6 +10,12 @@ turing_machine_driver/turing_driver-backups
 turing_machine_driver/gerber
 turing_machine_driver/~*
 turing_machine_driver/#*
+control_panel/fp-info-cache
+control_panel/plots
+control_panel/control_panel-backups
+control_panel/gerber
+control_panel/~*
+control_panel/#*
 doc/Tura_dokumentacja.aux
 doc/Tura_dokumentacja.log
 doc/Tura_dokumentacja.synctex.gz
