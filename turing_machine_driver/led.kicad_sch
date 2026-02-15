@@ -9693,7 +9693,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "045e08be-0a74-4212-b5fd-45fea05f8fae")
-		(property "Reference" "#PWR062"
+		(property "Reference" "#PWR068"
 			(at 39.37 149.86 0)
 			(effects
 				(font
@@ -9743,7 +9743,7 @@
 		(instances
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/562acabc-952c-4b77-9fae-ac66789ebc9f"
-					(reference "#PWR062")
+					(reference "#PWR068")
 					(unit 1)
 				)
 			)
@@ -9759,7 +9759,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0ede7160-61f0-4758-b70a-75fde18c1c87")
-		(property "Reference" "#PWR076"
+		(property "Reference" "#PWR082"
 			(at 240.03 68.58 0)
 			(effects
 				(font
@@ -9809,7 +9809,7 @@
 		(instances
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/562acabc-952c-4b77-9fae-ac66789ebc9f"
-					(reference "#PWR076")
+					(reference "#PWR082")
 					(unit 1)
 				)
 			)
@@ -10493,7 +10493,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "22ec99ba-edf5-4d12-ab04-ba6a0b46c7ad")
-		(property "Reference" "#PWR074"
+		(property "Reference" "#PWR080"
 			(at 191.77 148.59 0)
 			(effects
 				(font
@@ -10543,7 +10543,7 @@
 		(instances
 			(project "turing_driver"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/562acabc-952c-4b77-9fae-ac66789ebc9f"
-					(reference "#PWR074")
+					(reference "#PWR080")
 					(unit 1)
 				)
 			)
@@ -10559,7 +10559,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "27026ae2-dcd1-4b96-8986-a85ba296510a")
-		(property "Reference" "#PWR067"
+		(property "Reference" "#PWR073"
 			(at 100.33 68.58 0)
 			(effects
 				(font
@@ -10609,7 +10609,7 @@
 		(instances
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/562acabc-952c-4b77-9fae-ac66789ebc9f"
-					(reference "#PWR067")
+					(reference "#PWR073")
 					(unit 1)
 				)
 			)
@@ -10625,7 +10625,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2e231fa9-5304-4739-a9ba-46c2c660713e")
-		(property "Reference" "#PWR061"
+		(property "Reference" "#PWR067"
 			(at 39.37 137.16 0)
 			(effects
 				(font
@@ -10675,7 +10675,7 @@
 		(instances
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/562acabc-952c-4b77-9fae-ac66789ebc9f"
-					(reference "#PWR061")
+					(reference "#PWR067")
 					(unit 1)
 				)
 			)
@@ -10691,7 +10691,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "32113886-c768-459e-ba94-807a923237c9")
-		(property "Reference" "#PWR075"
+		(property "Reference" "#PWR081"
 			(at 240.03 25.4 0)
 			(effects
 				(font
@@ -10741,7 +10741,7 @@
 		(instances
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/562acabc-952c-4b77-9fae-ac66789ebc9f"
-					(reference "#PWR075")
+					(reference "#PWR081")
 					(unit 1)
 				)
 			)
@@ -10881,7 +10881,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "390e226a-8ed7-45ba-b2a7-141adf6b9714")
-		(property "Reference" "#PWR068"
+		(property "Reference" "#PWR074"
 			(at 125.73 93.98 0)
 			(effects
 				(font
@@ -10931,7 +10931,7 @@
 		(instances
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/562acabc-952c-4b77-9fae-ac66789ebc9f"
-					(reference "#PWR068")
+					(reference "#PWR074")
 					(unit 1)
 				)
 			)
@@ -11280,7 +11280,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4bf4048d-cde4-4739-a992-a0f28c7517ef")
-		(property "Reference" "#PWR070"
+		(property "Reference" "#PWR076"
 			(at 168.91 180.34 0)
 			(effects
 				(font
@@ -11330,7 +11330,7 @@
 		(instances
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/562acabc-952c-4b77-9fae-ac66789ebc9f"
-					(reference "#PWR070")
+					(reference "#PWR076")
 					(unit 1)
 				)
 			)
@@ -11449,7 +11449,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5e227fbd-7311-40b4-8990-a6548bddc897")
-		(property "Reference" "#PWR063"
+		(property "Reference" "#PWR069"
 			(at 39.37 193.04 0)
 			(effects
 				(font
@@ -11499,7 +11499,7 @@
 		(instances
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/562acabc-952c-4b77-9fae-ac66789ebc9f"
-					(reference "#PWR063")
+					(reference "#PWR069")
 					(unit 1)
 				)
 			)
@@ -11515,7 +11515,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5e68ab30-9381-486a-b566-6079b995cf7c")
-		(property "Reference" "#PWR066"
+		(property "Reference" "#PWR072"
 			(at 100.33 25.4 0)
 			(effects
 				(font
@@ -11565,7 +11565,7 @@
 		(instances
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/562acabc-952c-4b77-9fae-ac66789ebc9f"
-					(reference "#PWR066")
+					(reference "#PWR072")
 					(unit 1)
 				)
 			)
@@ -12166,7 +12166,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8645c322-a5da-4894-920d-984554f6f81c")
-		(property "Reference" "#PWR060"
+		(property "Reference" "#PWR066"
 			(at 39.37 93.98 0)
 			(effects
 				(font
@@ -12216,7 +12216,7 @@
 		(instances
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/562acabc-952c-4b77-9fae-ac66789ebc9f"
-					(reference "#PWR060")
+					(reference "#PWR066")
 					(unit 1)
 				)
 			)
@@ -12232,7 +12232,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "96f47703-b742-49bf-9d63-6980d69811d2")
-		(property "Reference" "#PWR065"
+		(property "Reference" "#PWR071"
 			(at 96.52 168.91 0)
 			(effects
 				(font
@@ -12282,7 +12282,7 @@
 		(instances
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/562acabc-952c-4b77-9fae-ac66789ebc9f"
-					(reference "#PWR065")
+					(reference "#PWR071")
 					(unit 1)
 				)
 			)
@@ -12376,7 +12376,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b6f16a84-7034-4c00-8324-5a2d18c5f87d")
-		(property "Reference" "#PWR064"
+		(property "Reference" "#PWR070"
 			(at 96.52 95.25 0)
 			(effects
 				(font
@@ -12426,7 +12426,7 @@
 		(instances
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/562acabc-952c-4b77-9fae-ac66789ebc9f"
-					(reference "#PWR064")
+					(reference "#PWR070")
 					(unit 1)
 				)
 			)
@@ -12442,7 +12442,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ba7ca38b-4d63-4827-be91-2433a47a64db")
-		(property "Reference" "#PWR073"
+		(property "Reference" "#PWR079"
 			(at 172.72 67.31 0)
 			(effects
 				(font
@@ -12492,7 +12492,7 @@
 		(instances
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/562acabc-952c-4b77-9fae-ac66789ebc9f"
-					(reference "#PWR073")
+					(reference "#PWR079")
 					(unit 1)
 				)
 			)
@@ -12508,7 +12508,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "bb95974f-2862-47d0-8558-f301988b2741")
-		(property "Reference" "#PWR069"
+		(property "Reference" "#PWR075"
 			(at 125.73 137.16 0)
 			(effects
 				(font
@@ -12558,7 +12558,7 @@
 		(instances
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/562acabc-952c-4b77-9fae-ac66789ebc9f"
-					(reference "#PWR069")
+					(reference "#PWR075")
 					(unit 1)
 				)
 			)
@@ -12784,7 +12784,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d11c4e92-5064-45d0-bcae-9e834a8f568b")
-		(property "Reference" "#PWR071"
+		(property "Reference" "#PWR077"
 			(at 168.91 187.96 0)
 			(effects
 				(font
@@ -12834,7 +12834,7 @@
 		(instances
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/562acabc-952c-4b77-9fae-ac66789ebc9f"
-					(reference "#PWR071")
+					(reference "#PWR077")
 					(unit 1)
 				)
 			)
@@ -12918,7 +12918,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e9b94b94-c4be-4e0b-b00e-b95036a1e853")
-		(property "Reference" "#PWR072"
+		(property "Reference" "#PWR078"
 			(at 172.72 24.13 0)
 			(effects
 				(font
@@ -12968,7 +12968,7 @@
 		(instances
 			(project "turing_machine"
 				(path "/c2889866-f59b-4a7d-9ec7-f6fbf53024cb/562acabc-952c-4b77-9fae-ac66789ebc9f"
-					(reference "#PWR072")
+					(reference "#PWR078")
 					(unit 1)
 				)
 			)
