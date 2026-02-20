@@ -7032,6 +7032,16 @@
 		(uuid "0eb0f316-0a63-4bee-a78c-4f1ee9b32d68")
 	)
 	(label "GND"
+		(at 224.79 148.59 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "11c6e02e-e586-43f9-811e-4a6fb27f8489")
+	)
+	(label "GND"
 		(at 261.62 52.07 180)
 		(effects
 			(font
@@ -7130,16 +7140,6 @@
 			(justify right bottom)
 		)
 		(uuid "2c756f68-075a-45b5-bee8-33020cf835ae")
-	)
-	(label "LED_GND"
-		(at 223.52 148.59 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "2fbe11e3-152a-4fec-a7f4-a94226784be4")
 	)
 	(label "5V"
 		(at 78.74 52.07 0)
@@ -8420,28 +8420,6 @@
 		(uuid "3c129220-97be-4a9d-a63b-a23e0147bd77")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 195.1688 38.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "LED_GND"
-		(shape input)
-		(at 224.79 148.59 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "3c58be97-0dc8-46f4-a659-b73e086133de")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 236.0604 148.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)

@@ -5589,6 +5589,10 @@
 		(uuid "05bcc12b-74b1-4edb-b5cc-b5b87777d1fe")
 	)
 	(no_connect
+		(at 344.17 153.67)
+		(uuid "18cec6a1-5a5f-41d6-92ef-241ac0ea6f49")
+	)
+	(no_connect
 		(at 116.84 105.41)
 		(uuid "272feb73-26aa-4ee7-9b48-d44c4d3bb359")
 	)
@@ -5621,8 +5625,20 @@
 		(uuid "71390aa9-d218-460a-b3a6-c6b8793f6c40")
 	)
 	(no_connect
+		(at 344.17 151.13)
+		(uuid "7f3b81ea-8f4e-4a23-8834-146ca644ebe4")
+	)
+	(no_connect
 		(at 116.84 95.25)
 		(uuid "a5594f4a-48c4-4221-b4cc-a89832e72442")
+	)
+	(no_connect
+		(at 344.17 158.75)
+		(uuid "a99d23b0-e177-44d9-b91f-94f7e9617203")
+	)
+	(no_connect
+		(at 344.17 156.21)
+		(uuid "b7e2ba79-c78f-4835-ba2d-67809e7e89dd")
 	)
 	(no_connect
 		(at 93.98 49.53)
@@ -5771,6 +5787,16 @@
 			(type default)
 		)
 		(uuid "3f2f0f4f-e646-4971-bee3-ca890c44d0c4")
+	)
+	(wire
+		(pts
+			(xy 318.77 158.75) (xy 313.69 158.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3fb89336-61b2-4986-aa13-9f268c24bb5e")
 	)
 	(wire
 		(pts
@@ -6031,6 +6057,16 @@
 			(type default)
 		)
 		(uuid "8906a13b-c0d0-4bde-8d4e-bfeae2dc7ebf")
+	)
+	(wire
+		(pts
+			(xy 318.77 151.13) (xy 313.69 151.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "89618543-c728-4989-b24f-20e5b912b320")
 	)
 	(wire
 		(pts
@@ -6324,6 +6360,16 @@
 	)
 	(wire
 		(pts
+			(xy 318.77 153.67) (xy 313.69 153.67)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cd7fcfd1-551a-449e-ad6e-2cdfc037b89e")
+	)
+	(wire
+		(pts
 			(xy 228.6 77.47) (xy 228.6 69.85)
 		)
 		(stroke
@@ -6522,6 +6568,16 @@
 		)
 		(uuid "11fad0dc-79c3-43c5-87c7-d66e25586389")
 	)
+	(label "5V"
+		(at 313.69 151.13 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1545c69d-7e7e-4c9e-86bd-57b948da6c7f")
+	)
 	(label "~{OPERATE}"
 		(at 173.99 80.01 0)
 		(effects
@@ -6551,6 +6607,16 @@
 			(justify left bottom)
 		)
 		(uuid "3408db17-c1dd-4a07-8a6b-0d9b04780e98")
+	)
+	(label "5V"
+		(at 313.69 158.75 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "37fcdb4d-644d-483e-836b-c6af259ed3d9")
 	)
 	(label "D_{5}"
 		(at 66.04 85.09 0)
@@ -6671,6 +6737,16 @@
 			(justify left bottom)
 		)
 		(uuid "a387a200-dbe1-474c-94aa-77a3254cd4ce")
+	)
+	(label "5V"
+		(at 313.69 153.67 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a3c6f643-57a4-4877-8cea-94a1d872b19a")
 	)
 	(label "D_{4}"
 		(at 66.04 82.55 0)
