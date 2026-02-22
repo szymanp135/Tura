@@ -16,6 +16,12 @@ control_panel/control_panel-backups
 control_panel/gerber
 control_panel/~*
 control_panel/#*
+backplane/fp-info-cache
+backplane/plots
+backplane/backplane-backups
+backplane/gerber
+backplane/~*
+backplane/#*
 doc/Tura_dokumentacja.aux
 doc/Tura_dokumentacja.log
 doc/Tura_dokumentacja.synctex.gz
