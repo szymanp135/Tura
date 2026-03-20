@@ -16800,18 +16800,6 @@
 		(uuid "e6aae933-2615-42af-a53e-96b36b9a5b00")
 	)
 	(gr_rect
-		(start 162.179 121.285)
-		(end 167.259 126.365)
-		(stroke
-			(width 0.3)
-			(type solid)
-		)
-		(fill yes)
-		(layer "B.Cu")
-		(net 1)
-		(uuid "44bcf563-e885-455e-bbd7-dbd10cc6593d")
-	)
-	(gr_rect
 		(start 189.23 64.77)
 		(end 190.5 78.74)
 		(stroke
@@ -16825,7 +16813,7 @@
 	)
 	(gr_rect
 		(start 33.02 121.285)
-		(end 113.157 126.365)
+		(end 183.007 126.365)
 		(stroke
 			(width 0.3)
 			(type solid)
@@ -16834,42 +16822,6 @@
 		(layer "B.Cu")
 		(net 1)
 		(uuid "524545e1-9931-4217-b150-89dd03a42325")
-	)
-	(gr_rect
-		(start 177.165 121.285)
-		(end 182.88 126.365)
-		(stroke
-			(width 0.3)
-			(type solid)
-		)
-		(fill yes)
-		(layer "B.Cu")
-		(net 1)
-		(uuid "56e728f7-bcce-43f2-bb91-705f883cdce8")
-	)
-	(gr_rect
-		(start 113.03 125.984)
-		(end 162.56 126.365)
-		(stroke
-			(width 0.3)
-			(type solid)
-		)
-		(fill yes)
-		(layer "B.Cu")
-		(net 1)
-		(uuid "6dc32761-4024-4946-a21e-2b6fd3e8472b")
-	)
-	(gr_rect
-		(start 165.989 125.095)
-		(end 177.038 126.365)
-		(stroke
-			(width 0.3)
-			(type solid)
-		)
-		(fill yes)
-		(layer "B.Cu")
-		(net 1)
-		(uuid "8cfdd4b1-d742-4794-8fd7-5e1d948ea647")
 	)
 	(gr_rect
 		(start 26.035 24.13)
@@ -16896,18 +16848,6 @@
 		(layer "B.Cu")
 		(net 1)
 		(uuid "b2bedcf8-d728-43c8-86f2-a10e2fb0c004")
-	)
-	(gr_rect
-		(start 113.03 121.285)
-		(end 162.56 121.92)
-		(stroke
-			(width 0.3)
-			(type solid)
-		)
-		(fill yes)
-		(layer "B.Cu")
-		(net 1)
-		(uuid "d94e1541-908d-43bc-a999-d41df0d17485")
 	)
 	(gr_circle
 		(center 186.69 123.19)
@@ -17038,33 +16978,6 @@
 		)
 		(layer "Edge.Cuts")
 		(uuid "90340d70-914a-4e9e-99b2-8e351adfe890")
-	)
-	(gr_text "Tura"
-		(locked yes)
-		(at 177.165 125.095 0)
-		(layer "B.Cu" knockout)
-		(uuid "8cda0b71-9c5f-4a43-bd77-b246615092c6")
-		(effects
-			(font
-				(size 3 3)
-				(thickness 0.6)
-				(bold yes)
-			)
-			(justify left bottom mirror)
-		)
-	)
-	(gr_text "Paweł Szymański   02.2026"
-		(at 162.56 125.095 0)
-		(layer "B.Cu" knockout)
-		(uuid "e7a4487b-94f9-44d9-9c8c-8be1229cdb52")
-		(effects
-			(font
-				(size 2.3 2.3)
-				(thickness 0.46)
-				(bold yes)
-			)
-			(justify left bottom mirror)
-		)
 	)
 	(gr_text "C"
 		(at 26.67 40.005 0)
@@ -17320,6 +17233,18 @@
 				(thickness 1)
 			)
 			(justify left bottom)
+		)
+	)
+	(gr_text "https://github.com/szymanp135/Tura"
+		(at 180.975 125.095 0)
+		(layer "B.SilkS")
+		(uuid "24b28155-1bec-42f3-9e20-960f34ef8196")
+		(effects
+			(font
+				(size 2 2)
+				(thickness 0.25)
+			)
+			(justify left bottom mirror)
 		)
 	)
 	(segment

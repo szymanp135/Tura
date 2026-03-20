@@ -21772,7 +21772,7 @@
 	)
 	(gr_rect
 		(start 106.045 131.445)
-		(end 119.126 135.89)
+		(end 183.261 135.89)
 		(stroke
 			(width 0.05)
 			(type solid)
@@ -21780,17 +21780,6 @@
 		(fill yes)
 		(layer "B.Cu")
 		(uuid "d1bbb4c3-a674-496e-8f94-f34d026cfe52")
-	)
-	(gr_rect
-		(start 119.126 135.509)
-		(end 182.88 135.89)
-		(stroke
-			(width 0.05)
-			(type solid)
-		)
-		(fill yes)
-		(layer "B.Cu")
-		(uuid "d4242c90-7f2b-43c1-b0f4-b3e05cda25f7")
 	)
 	(gr_poly
 		(pts
@@ -21897,19 +21886,6 @@
 		)
 		(layer "Edge.Cuts")
 		(uuid "ff0716ff-f971-4ec8-a6d6-6d38668ee463")
-	)
-	(gr_text "Tura    Paweł Szymański   02.2026"
-		(at 182.88 134.62 0)
-		(layer "B.Cu" knockout)
-		(uuid "db402177-022c-490b-9fb9-ca6086de3764")
-		(effects
-			(font
-				(size 2.3 2.3)
-				(thickness 0.46)
-				(bold yes)
-			)
-			(justify left bottom mirror)
-		)
 	)
 	(gr_text "Paweł Szymański\n02.2026"
 		(at 184.15 100.33 0)
@@ -22019,6 +21995,18 @@
 				(thickness 0.15)
 			)
 			(justify left bottom)
+		)
+	)
+	(gr_text "https://github.com/szymanp135/Tura"
+		(at 181.61 134.62 0)
+		(layer "B.SilkS")
+		(uuid "81bb0a49-db51-4e3f-860e-e28969c6721b")
+		(effects
+			(font
+				(size 2 2)
+				(thickness 0.25)
+			)
+			(justify left bottom mirror)
 		)
 	)
 	(segment
